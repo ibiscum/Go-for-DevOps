@@ -10,7 +10,7 @@ require (
 	github.com/aelsabbahy/goss v0.3.16
 	github.com/c9s/goprocinfo v0.0.0-20210130143923-c95fcf8c64a8
 	github.com/cenkalti/backoff v2.2.1+incompatible
-	github.com/coreos/go-systemd/v22 v22.3.2
+	github.com/coreos/go-systemd/v22 v22.5.0
 	github.com/fatih/color v1.13.0
 	github.com/gogo/protobuf v1.3.2
 	github.com/google/goexpect v0.0.0-20210430020637-ab937bf7fd6f
