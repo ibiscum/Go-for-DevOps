@@ -25,7 +25,7 @@ require (
 	github.com/pkg/sftp v1.13.4
 	github.com/prometheus/client_golang v1.12.1
 	github.com/prometheus/common v0.33.0
-	github.com/rodaine/table v1.0.1
+	github.com/rodaine/table v1.2.0
 	github.com/slack-go/slack v0.10.2
 	github.com/sony/gobreaker v0.5.0
 	github.com/spf13/cobra v1.4.0
@@ -102,7 +102,7 @@ require (
 	github.com/magiconair/properties v1.8.5 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
-	github.com/mattn/go-runewidth v0.0.9 // indirect
+	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/miekg/dns v1.1.41 // indirect
 	github.com/mitchellh/copystructure v1.0.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
@@ -122,6 +122,7 @@ require (
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
 	github.com/richardlehane/mscfb v1.0.4 // indirect
 	github.com/richardlehane/msoleps v1.0.1 // indirect
+	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/spf13/afero v1.6.0 // indirect
 	github.com/spf13/cast v1.4.1 // indirect
