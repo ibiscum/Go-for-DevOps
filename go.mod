@@ -27,7 +27,7 @@ require (
 	github.com/prometheus/common v0.33.0
 	github.com/rodaine/table v1.2.0
 	github.com/slack-go/slack v0.10.2
-	github.com/sony/gobreaker v0.5.0
+	github.com/sony/gobreaker v1.0.0
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.10.1
