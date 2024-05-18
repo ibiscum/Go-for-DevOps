@@ -7,7 +7,7 @@
 package proto
 
 import (
-	model "github.com/PacktPublishing/Go-for-DevOps/chapter/11/ops/proto/jaeger/model"
+	model "github.com/ibiscum/Go-for-DevOps/chapter11/ops/proto/jaeger/model"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"

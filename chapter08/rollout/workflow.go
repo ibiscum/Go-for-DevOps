@@ -77,11 +77,11 @@ func newWorkflow(config *config, lb *client.Client) (*workflow, error) {
 func (w *workflow) run(ctx context.Context) error {
 	// Run a local precondition to make sure our load balancer is in a healthy state.
 	preCtx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
 	if err := w.checkLBState(preCtx); err != nil {
 		w.endState = esPreconditionFailure
 		return fmt.Errorf("checkLBState precondition fail: %s", err)
 	}
-	cancel()
 
 	// Run our canaries one at a time. Any problem stops the workflow.
 	for i := 0; i < len(w.actions) && int32(i) < w.config.CanaryNum; i++ {
@@ -91,7 +91,7 @@ func (w *workflow) run(ctx context.Context) error {
 		cancel()
 		if err != nil {
 			w.endState = esCanaryFailure
-			return fmt.Errorf("canary failure on endpoint(%s): %w\n", w.actions[i].endpoint, err)
+			return fmt.Errorf("canary failure on endpoint(%s): %w", w.actions[i].endpoint, err)
 		}
 		color.Yellow("Sleeping after canary for 1 minutes")
 		time.Sleep(1 * time.Minute)
@@ -143,6 +143,7 @@ func (w *workflow) retryFailed(ctx context.Context) {
 	wg := sync.WaitGroup{}
 
 	for i := 0; i < len(ws.failures); i++ {
+		i := i
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
@@ -225,11 +226,11 @@ func (w *workflow) status() workflowStatus {
 type stateFn func(ctx context.Context) (stateFn, error)
 
 type actions struct {
-	endpoint  string
-	backend   client.IPBackend
-	config    *config
-	srcf      *os.File
-	dst       string
+	endpoint string
+	backend  client.IPBackend
+	config   *config
+	srcf     *os.File
+	//dst       string
 	lb        *client.Client
 	sshClient *ssh.Client
 

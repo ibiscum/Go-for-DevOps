@@ -14,8 +14,8 @@ import (
 	duration "google.golang.org/protobuf/types/known/durationpb"
 	timestamp "google.golang.org/protobuf/types/known/timestamppb"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/11/ops/proto/jaeger"
-	mpb "github.com/PacktPublishing/Go-for-DevOps/chapter/11/ops/proto/jaeger/model"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter11/ops/proto/jaeger"
+	mpb "github.com/ibiscum/Go-for-DevOps/chapter11/ops/proto/jaeger/model"
 )
 
 var (

@@ -13,7 +13,7 @@ import (
 
 	"github.com/coreos/go-systemd/v22/dbus"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/8/agent/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter08/agent/proto"
 )
 
 var systemdUnits = ""

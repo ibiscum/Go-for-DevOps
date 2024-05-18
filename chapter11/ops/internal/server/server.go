@@ -11,16 +11,16 @@ import (
 	"sync"
 	"time"
 
-	jaeger "github.com/PacktPublishing/Go-for-DevOps/chapter/11/ops/internal/jaeger/client"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/11/ops/internal/prom"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore/client"
+	jaeger "github.com/ibiscum/Go-for-DevOps/chapter11/ops/internal/jaeger/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/ops/internal/prom"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/petstore/client"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/protobuf/types/known/durationpb"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/11/ops/proto"
-	mpb "github.com/PacktPublishing/Go-for-DevOps/chapter/11/ops/proto/jaeger/model"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/11/ops/proto"
+	mpb "github.com/ibiscum/Go-for-DevOps/chapter/11/ops/proto/jaeger/model"
 )
 
 // API implements our gRPC server's API.

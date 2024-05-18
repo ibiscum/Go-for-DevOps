@@ -47,17 +47,20 @@ func main() {
 
 	switch flag.Args()[0] {
 	case "addPool":
-		ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+		defer cancel()
 		if err := c.AddPool(ctx, *pattern, pb.PoolType_PT_P2C, hcs); err != nil {
 			panic(err)
 		}
 	case "removePool":
-		ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+		defer cancel()
 		if err := c.RemovePool(ctx, *pattern); err != nil {
 			panic(err)
 		}
 	case "addBackend":
-		ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+		defer cancel()
 
 		b := client.IPBackend{
 			IP:      net.ParseIP(*ip),
@@ -68,7 +71,8 @@ func main() {
 			panic(err)
 		}
 	case "removeBackend":
-		ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+		defer cancel()
 
 		b := client.IPBackend{
 			IP:      net.ParseIP(*ip),
@@ -79,7 +83,8 @@ func main() {
 			panic(err)
 		}
 	case "poolHealth":
-		ctx, _ := context.WithTimeout(context.Background(), 2*time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+		defer cancel()
 		ph, err := c.PoolHealth(ctx, *pattern, true, true)
 		if err != nil {
 			panic(err)

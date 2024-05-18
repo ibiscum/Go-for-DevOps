@@ -26,12 +26,12 @@ import (
 	"log"
 	"os"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/8/agent/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter08/agent/client"
 
 	"github.com/spf13/cobra"
 	"golang.org/x/crypto/ssh"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/8/agent/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter08/agent/proto"
 )
 
 // removeCmd represents the remove command
@@ -50,10 +50,10 @@ cli remove 22.47.60.3:22 helloworld
 			os.Exit(1)
 		}
 
-		c, err := client.New(
-			args[0],
-			[]ssh.AuthMethod{auth},
-		)
+		c, err := client.New(args[0], []ssh.AuthMethod{auth})
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		_, err = c.Remove(
 			context.Background(),

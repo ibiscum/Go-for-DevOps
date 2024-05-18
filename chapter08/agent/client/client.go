@@ -18,11 +18,11 @@ import (
 	"golang.org/x/crypto/ssh"
 	"google.golang.org/grpc"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/8/agent/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter08/agent/proto"
 )
 
 type Client struct {
-	user     string
+	//user     string
 	endpoint string
 	conn     *grpc.ClientConn
 	client   pb.AgentClient

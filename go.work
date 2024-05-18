@@ -6,6 +6,7 @@ use (
 	./chapter06/grpc/proto
 	./chapter06/grpc/server
 	./chapter07
+	./chapter08
 	./chapter08/rollout/lb/client
 	./chapter08/rollout/lb/proto
 	./chapter08/rollout/lb/server/grpc
@@ -18,9 +19,13 @@ use (
 	./chapter09/tracing/server
 	./chapter10
 	./chapter11/ops/internal/jaeger/client/test/server
+	./chapter11/ops/proto
 	./chapter11/petstore
 	./chapter13/petstore-provider
 	./chapter14/petstore-operator
 	./chapter14/workloads
-	./chapter15
+	./chapter15/pkg/helpers
+	./chapter15/pkg/mgmt
+	./chapter16/workflow/client
+	./chapter16/workflow/proto
 )

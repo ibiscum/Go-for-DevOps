@@ -28,12 +28,12 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/8/agent/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter08/agent/client"
 
 	"github.com/spf13/cobra"
 	"golang.org/x/crypto/ssh"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/8/agent/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter08/agent/proto"
 )
 
 // installCmd represents the install command

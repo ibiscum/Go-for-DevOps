@@ -1,9 +1,10 @@
-module github.com/ibiscum/Go-for-DevOps/chapter16/workflow/client
+module github.com/ibiscum/Go-for-DevOps/chapter11/ops/proto
 
 go 1.22.1
 
 require (
-	github.com/cenkalti/backoff v2.1.1+incompatible
+	github.com/gogo/protobuf v1.3.2
+	google.golang.org/genproto/googleapis/api v0.0.0-20240515191416-fc5f0ca64291
 	google.golang.org/grpc v1.64.0
 	google.golang.org/protobuf v1.34.1
 )

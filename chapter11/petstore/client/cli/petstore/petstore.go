@@ -62,7 +62,7 @@ func main() {
 
 	if len(os.Args) < 2 {
 		fmt.Println("Error: arguments are not valid")
-		fmt.Println(helpText)
+		fmt.Print(helpText)
 		os.Exit(1)
 	}
 
@@ -77,7 +77,7 @@ func main() {
 	case "add":
 		if len(os.Args) < 3 {
 			fmt.Println("Error: not enough arguments to add command")
-			fmt.Println(helpText)
+			fmt.Print(helpText)
 			os.Exit(1)
 		}
 		p := &pb.Pet{}
@@ -96,7 +96,7 @@ func main() {
 	case "delete":
 		if len(os.Args) < 3 {
 			fmt.Println("Error: not enough arguments to delete command")
-			fmt.Println(helpText)
+			fmt.Print(helpText)
 			os.Exit(1)
 		}
 		if err := c.DeletePets(ctx, os.Args[2:]); err != nil {
@@ -108,7 +108,7 @@ func main() {
 	case "search":
 		if len(os.Args) < 3 {
 			fmt.Println("Error: not enough arguments to search command")
-			fmt.Println(helpText)
+			fmt.Print(helpText)
 			os.Exit(1)
 		}
 		r := getSearchReq()
@@ -125,10 +125,10 @@ func main() {
 			fmt.Println(protojson.Format(p))
 		}
 	case "help":
-		fmt.Println(helpText)
+		fmt.Print(helpText)
 	default:
 		fmt.Println("Error: unknown command: ", cmd)
-		fmt.Println(helpText)
+		fmt.Print(helpText)
 	}
 }
 

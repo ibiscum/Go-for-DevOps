@@ -17,10 +17,12 @@ import (
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/metric"
-	"go.opentelemetry.io/otel/propagation"
-	controller "go.opentelemetry.io/otel/sdk/metric/controller/basic"
-	processor "go.opentelemetry.io/otel/sdk/metric/processor/basic"
-	"go.opentelemetry.io/otel/sdk/metric/selector/simple"
+	// "go.opentelemetry.io/otel/metric/global"
+	"go.opentelemetry.io/otel/sdk"
+
+	// controller "go.opentelemetry.io/otel/sdk/metric/controller/basic"
+	// processor "go.opentelemetry.io/otel/sdk/metric/processor/basic"
+	// "go.opentelemetry.io/otel/sdk/metric/selector/simple"
 	"go.opentelemetry.io/otel/sdk/resource"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
@@ -98,7 +100,7 @@ func initTracer(ctx context.Context, otelAgentAddr string) func(context.Context)
 
 // initMetrics initializes a metrics pusher and registers the metrics provider with the global context
 func initMetrics(ctx context.Context, otelAgentAddr string) func(context.Context) {
-	metricClient := otlpmetricgrpc.NewClient(
+	metricClient, _ := otlpmetricgrpc.NewClient(
 		otlpmetricgrpc.WithInsecure(),
 		otlpmetricgrpc.WithEndpoint(otelAgentAddr))
 	metricExp, err := otlpmetric.New(ctx, metricClient)
