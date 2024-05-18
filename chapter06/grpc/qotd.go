@@ -4,7 +4,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/6/grpc/server"
+	"github.com/ibiscum/Go-for-DevOps/chapter06/grpc/server"
 )
 
 var addr = flag.String("addr", "127.0.0.1:80", "The address to run on.")

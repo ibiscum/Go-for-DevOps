@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/6/grpc/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter06/grpc/proto"
 )
 
 type API struct {

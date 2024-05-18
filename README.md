@@ -10,7 +10,7 @@ This is the code repository for [Go for DevOps](https://www.packtpub.com/product
 **Learn how to use the Go language to automate servers, the cloud, Kubernetes, GitHub, Packer, and Terraform**
 
 ## What is this book about?
-Go is the go-to language for DevOps libraries and services, and without it, achieving fast and safe automation is a challenge. With the help of Go for DevOps, you'll learn how to deliver services with ease and safety, becoming a better DevOps engineer in the process. 
+Go is the go-to language for DevOps libraries and services, and without it, achieving fast and safe automation is a challenge. With the help of Go for DevOps, you'll learn how to deliver services with ease and safety, becoming a better DevOps engineer in the process.
 
 This book covers the following exciting features:
 * Understand the basic structure of the Go language to begin your DevOps journey
@@ -24,7 +24,7 @@ This book covers the following exciting features:
 
 If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1801818894) today!
 
-<a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" 
+<a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/ibiscum/GitHub/master/GitHub.png"
 alt="https://www.packtpub.com/" border="5" /></a>
 
 ## Instructions and Navigations

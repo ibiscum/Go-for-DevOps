@@ -8,9 +8,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/internal/policy"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/proto"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/policy"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
 )
 
 // This registers our policy with the service.

@@ -3,12 +3,15 @@ Package jobs defines our Job type, which executes work and a registration system
 Jobs.
 
 Packages that contain jobs can register themselves by doing:
+
 	func init() {
 		jobs.Register("name", job)
 	}
+
 If there is a duplicate name, this will panic.
 
 Fetching a Job is simply:
+
 	GetJob(jt string) (Job, error)
 */
 package jobs
@@ -20,7 +23,7 @@ import (
 	"log"
 	"strings"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
 )
 
 var jobs = map[string]Job{}

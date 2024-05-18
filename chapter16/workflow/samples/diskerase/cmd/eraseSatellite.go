@@ -28,10 +28,10 @@ import (
 	"sort"
 	"time"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/client"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/data/packages/sites"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/data/packages/sites"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
 
 	"github.com/spf13/cobra"
 )

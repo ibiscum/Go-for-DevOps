@@ -4,9 +4,12 @@ this is just a demo, this really just sleeps for 30 seconds.
 
 Register name: "diskErase"
 Args:
+
 	"machine"(mandatory): The name of the machine, like "aa01" or "ab02"
 	"site"(mandatory): The name of the site, like "aaa" or "aba"
+
 Result:
+
 	Erases a disk on a machine, except this is a demo, so it really just sleeps for 30 seconds.
 */
 package diskerase
@@ -16,9 +19,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/data/packages/sites"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/proto"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/data/packages/sites"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
 )
 
 // This registers our Job on server startup.

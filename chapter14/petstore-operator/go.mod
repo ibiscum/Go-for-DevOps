@@ -1,4 +1,4 @@
-module github.com/PacktPublishing/Go-for-DevOps/chapter/14/petstore-operator
+module github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator
 
 go 1.17
 

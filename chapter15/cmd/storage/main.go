@@ -12,8 +12,8 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob"
 	"github.com/joho/godotenv"
 
-	. "github.com/PacktPublishing/Go-for-DevOps/chapter/15/pkg/helpers"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/15/pkg/mgmt"
+	. "github.com/ibiscum/Go-for-DevOps/chapter/15/pkg/helpers"
+	"github.com/ibiscum/Go-for-DevOps/chapter/15/pkg/mgmt"
 )
 
 func init() {

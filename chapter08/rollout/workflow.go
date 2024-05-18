@@ -19,17 +19,18 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/8/rollout/lb/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/client"
 
 	"github.com/fatih/color"
 	"github.com/pkg/sftp"
 	"golang.org/x/crypto/ssh"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/8/rollout/lb/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/proto"
 )
 
-//go:generate stringer -type=endState
 // endStates are the final states after a run of a workflow.
+//
+//go:generate stringer -type=endState
 type endState int8
 
 const (

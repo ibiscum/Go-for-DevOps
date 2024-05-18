@@ -1,4 +1,4 @@
-module github.com/PacktPublishing/Go-for-DevOps/chapter/15
+module github.com/ibiscum/Go-for-DevOps/chapter/15
 
 go 1.18
 

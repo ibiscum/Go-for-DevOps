@@ -5,6 +5,7 @@ and use them. This package will also report any metric that is not used in the f
 to prevent useless metrics from existing, as all metrics should be grabbed by that time.
 
 In a package you want to set metrics, you can do it as follows:
+
 	var addCount metrics.Int64Counter
 
 	func init() {
@@ -21,8 +22,8 @@ In a package you want to set metrics, you can do it as follows:
 		...
 	}
 
-
 To cause metrics to be exported package main():
+
 	func main() {
 		...
 		stop, err := metrics.Start(ctx, metrics.OTELGRPC{Addr: "ip:port"})
@@ -42,7 +43,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/13/petstore-provider/internal/client/internal/server/log"
+	"github.com/ibiscum/Go-for-DevOps/chapter/13/petstore-provider/internal/client/internal/server/log"
 
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/global"

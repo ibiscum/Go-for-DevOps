@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/6/grpc/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter06/grpc/client"
 )
 
 var (

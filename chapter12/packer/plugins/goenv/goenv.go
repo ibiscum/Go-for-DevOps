@@ -10,7 +10,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/12/packer/plugins/goenv/internal/config"
+	"github.com/ibiscum/Go-for-DevOps/chapter/12/packer/plugins/goenv/internal/config"
 
 	"github.com/gopherfs/fs/io/mem/simple"
 	"github.com/hashicorp/hcl/v2/hcldec"

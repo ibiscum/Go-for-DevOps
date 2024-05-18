@@ -1,6 +1,6 @@
-module github.com/PacktPublishing/Go-for-DevOps/chapter/10
+module github.com/ibiscum/Go-for-DevOps/chapter10
 
-go 1.17
+go 1.22.1
 
 require (
 	github.com/dghubble/go-twitter v0.0.0-20210609183100-2fdbf421508e

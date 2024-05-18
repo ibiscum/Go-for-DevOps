@@ -4,22 +4,24 @@ Policies that is for reading the Config as it is updated on disk and
 configuration validation to make sure errors don't slip in to the Config.
 
 A configuration is stored in JSON and looks like:
-{
-	"Name": "SateliteDiskErase",
-	"Policies": [
-		{
-			"Name": "restrictJobTypes",
-			"Settings": {
-				"AllowedJobs": [
-				        "JTValidateDecom",
-        				"JTDiskErase",
-        				"JTSleep",
-        				"JTGetTokenFromBucket"
-				]
+
+	{
+		"Name": "SateliteDiskErase",
+		"Policies": [
+			{
+				"Name": "restrictJobTypes",
+				"Settings": {
+					"AllowedJobs": [
+					        "JTValidateDecom",
+	        				"JTDiskErase",
+	        				"JTSleep",
+	        				"JTGetTokenFromBucket"
+					]
+				}
 			}
-		}
-	]
-}
+		]
+	}
+
 ...
 */
 package config
@@ -33,7 +35,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/internal/policy"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/policy"
 )
 
 // Policies provides the policy Reader that can be used to read the current policy.

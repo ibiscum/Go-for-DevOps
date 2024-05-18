@@ -3,9 +3,12 @@ Package tokenbucket registers a job that is used to fetch a token from a token b
 
 Register name: "tokenBucket"
 Args:
+
 	"bucket"(mandatory): The name of the bucket
 	"fatal"(mandatory): true if a failure should cause a fatal error, false if it should block until it gets one
+
 Result:
+
 	If the site is not in decom, will return a fatal error.
 */
 package tokenbucket
@@ -15,11 +18,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/data/packages/sites"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/internal/token"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/data/packages/sites"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/token"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
 )
 
 var buckets = map[string]*token.Bucket{}

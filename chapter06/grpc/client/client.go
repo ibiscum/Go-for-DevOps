@@ -6,7 +6,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/6/grpc/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter06/grpc/proto"
 )
 
 // Client is a client to the Quote of the day server.

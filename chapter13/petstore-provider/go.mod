@@ -1,4 +1,4 @@
-module github.com/PacktPublishing/Go-for-DevOps/chapter/13/petstore-provider
+module github.com/ibiscum/Go-for-DevOps/chapter13/petstore-provider
 
 go 1.17
 

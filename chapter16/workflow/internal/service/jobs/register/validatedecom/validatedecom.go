@@ -3,9 +3,12 @@ Package validatedecom registers a job that is used to validate a site is set to 
 
 Register name: "validateDecom"
 Args:
+
 	"site"(mandatory): The name of the site, like "aaa" or "aba"
 	"siteType"(mandatory): The type of the site, like "satellite" or "cluster"
+
 Result:
+
 	If the site is not in decom, will return a fatal error.
 */
 package validatedecom
@@ -14,10 +17,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/data/packages/sites"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/data/packages/sites"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
 )
 
 // This registers our Job on server startup.

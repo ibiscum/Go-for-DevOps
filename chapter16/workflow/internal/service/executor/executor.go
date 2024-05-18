@@ -3,14 +3,17 @@ Package executor provides the Work type which is used to execute a pb.WorkReq.
 This package is the meat of the engine.
 
 To create a Work object, simply:
+
 	work := executor.New(req, status}
 
 After creating a Work object, validate it:
+
 	if err := work.Validate(); err !=nil {
 		// Do something
 	}
 
 To run the Work object, do:
+
 	ch := work.Run()
 
 Once Run() returns, the pb.Status object passed will contain the results of running the WorkReq.
@@ -24,13 +27,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/internal/es"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/internal/policy"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/internal/policy/config"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/es"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/policy"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/policy/config"
+	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
 	"google.golang.org/protobuf/proto"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
 )
 
 // Work is an executor for executing a WorkReq received by the server.

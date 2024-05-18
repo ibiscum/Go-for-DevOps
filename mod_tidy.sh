@@ -8,7 +8,7 @@ for d in `find . -type d -print`; do
 	cd "$root/$d";
 
 	found=false;
-	for file in `find . -type f -name 'go.mod' -maxdepth 1 -print`; do
+	for file in `find . -maxdepth 1 -type f -name 'go.mod' -print`; do
 		found=true;
 		break;
 	done;

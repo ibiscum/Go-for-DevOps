@@ -6,8 +6,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/13/petstore-provider/internal/client"
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/13/petstore-provider/internal/client/proto"
+	"github.com/ibiscum/Go-for-DevOps/chapter/13/petstore-provider/internal/client"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/13/petstore-provider/internal/client/proto"
 )
 
 func resourcePet() *schema.Resource {

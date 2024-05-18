@@ -1,5 +1,6 @@
 /*
 Package client provides access to the workflow service. You can use this client to:
+
 	Submit a *pb.WorkReq to the service
 	Execute a *pb.WorkReq previously submitted
 	Get the status of a *pb.WorkReq
@@ -23,7 +24,7 @@ import (
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/proto"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/16/workflow/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
 )
 
 // Workflow represents our Workflow client. It uses a builtin circuit breaker wrapping

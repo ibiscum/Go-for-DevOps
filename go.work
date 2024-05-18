@@ -1,0 +1,18 @@
+go 1.22.1
+
+use (
+	./chapter05/excel
+	./chapter09/alerting/client
+	./chapter09/alerting/server
+	./chapter09/metrics/client
+	./chapter09/metrics/server
+	./chapter09/tracing/client
+	./chapter09/tracing/server
+	./chapter10
+	./chapter11/ops/internal/jaeger/client/test/server
+	./chapter11/petstore
+	./chapter13/petstore-provider
+	./chapter14/petstore-operator
+	./chapter14/workloads
+	./chapter15
+)

@@ -18,7 +18,7 @@ import (
 	"golang.org/x/crypto/ssh"
 	"google.golang.org/grpc"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/8/agent/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/8/agent/proto"
 )
 
 type Client struct {

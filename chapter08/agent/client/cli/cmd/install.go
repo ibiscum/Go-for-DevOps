@@ -28,12 +28,12 @@ import (
 	"os"
 	"strings"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/8/agent/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter/8/agent/client"
 
 	"github.com/spf13/cobra"
 	"golang.org/x/crypto/ssh"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/8/agent/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/8/agent/proto"
 )
 
 // installCmd represents the install command
@@ -42,7 +42,7 @@ var installCmd = &cobra.Command{
 	Short: "Installs an application in a remote container and starts it",
 	Long: `Install connects to the system agents giving a package name, a package file, and a binary
 within that package to run. It will connect to the system, unpack the contents into a Linux container and
-execute the binary using systemd. 
+execute the binary using systemd.
 
 An usage example:
 	cli install 22.47.60.3:22 helloworld ./apps/packages/helloworld.zip helloworld

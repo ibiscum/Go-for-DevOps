@@ -10,8 +10,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/13/petstore-provider/internal/client/internal/server/storage"
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/13/petstore-provider/internal/client/proto"
+	"github.com/ibiscum/Go-for-DevOps/chapter/13/petstore-provider/internal/client/internal/server/storage"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter/13/petstore-provider/internal/client/proto"
 )
 
 // Client is a client to the petstore service.

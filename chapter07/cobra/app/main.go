@@ -24,7 +24,7 @@ package main
 import (
 	"context"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/7/cobra/app/cmd"
+	"github.com/ibiscum/Go-for-DevOps/chapter/7/cobra/app/cmd"
 )
 
 func main() {
