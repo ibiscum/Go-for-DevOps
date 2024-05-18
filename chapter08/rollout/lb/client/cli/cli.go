@@ -7,12 +7,12 @@ import (
 	"net"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter08/rollout/lb/client"
 
 	"github.com/fatih/color"
 	"github.com/rodaine/table"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter08/rollout/lb/proto"
 )
 
 var (

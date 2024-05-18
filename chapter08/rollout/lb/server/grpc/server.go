@@ -10,11 +10,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/server/http"
+	"github.com/ibiscum/Go-for-DevOps/chapter08/rollout/lb/server/http"
 
 	"google.golang.org/grpc"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter08/rollout/lb/proto"
 )
 
 // Server is a gRPC server for interacting with the load balancer.

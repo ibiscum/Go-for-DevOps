@@ -10,14 +10,14 @@ import (
 	"os"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter08/rollout/lb/client"
 
 	"github.com/fatih/color"
 	"github.com/rodaine/table"
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/agent"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter08/rollout/lb/proto"
 )
 
 var (

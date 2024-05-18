@@ -4,8 +4,8 @@ import (
 	"log"
 	"net"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/server/grpc"
-	"github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/server/http"
+	"github.com/ibiscum/Go-for-DevOps/chapter08/rollout/lb/server/grpc"
+	"github.com/ibiscum/Go-for-DevOps/chapter08/rollout/lb/server/http"
 )
 
 func main() {

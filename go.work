@@ -6,6 +6,7 @@ use (
 	./chapter06/grpc/proto
 	./chapter06/grpc/server
 	./chapter07
+	./chapter08/rollout/lb/proto
 	./chapter09/alerting/client
 	./chapter09/alerting/server
 	./chapter09/metrics/client
