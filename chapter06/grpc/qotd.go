@@ -7,7 +7,7 @@ import (
 	"github.com/ibiscum/Go-for-DevOps/chapter06/grpc/server"
 )
 
-var addr = flag.String("addr", "127.0.0.1:80", "The address to run on.")
+var addr = flag.String("addr", "127.0.0.1:8001", "The address to run on.")
 
 func main() {
 	flag.Parse()

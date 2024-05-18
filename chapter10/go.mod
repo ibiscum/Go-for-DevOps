@@ -15,4 +15,5 @@ require (
 	github.com/dghubble/sling v1.3.0 // indirect
 	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
+	github.com/stretchr/testify v1.9.0 // indirect
 )
