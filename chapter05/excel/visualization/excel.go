@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/5/excel/visualization/internal/chart"
+	"github.com/ibiscum/Go-for-DevOps/chapter05/excel/visualization/internal/chart"
 
 	"github.com/xuri/excelize/v2"
 )
