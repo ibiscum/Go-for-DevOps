@@ -1,4 +1,4 @@
-module github.com/ibiscum/Go-for-DevOps/chapter06/grpc
+module github.com/ibiscum/Go-for-DevOps/chapter06/grpc/client
 
 go 1.22.1
 
