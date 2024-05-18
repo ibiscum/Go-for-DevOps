@@ -18,7 +18,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter08/rollout/lb/proto"
 )
 
 // weightedBackend implements Backend with a wrapper around another Backend. This
