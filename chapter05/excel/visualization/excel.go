@@ -162,12 +162,15 @@ func (s *serverSheet) createCPUChart() error {
 		},
 	)
 
-	b, err := json.Marshal(c)
-	if err != nil {
-		return err
-	}
+	// b, err := json.Marshal(c)
+	// if err != nil {
+	// 	return err
+	// }
 
-	if err := s.xlsx.AddChart(s.sheetName, "I1", string(b)); err != nil {
+	// if err := s.xlsx.AddChart(s.sheetName, "I1", string(b)); err != nil {
+	// 	return err
+	// }
+	if err := s.xlsx.AddChart(s.sheetName, "I1", *c); err != nil {
 		return err
 	}
 
