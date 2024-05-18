@@ -17,7 +17,7 @@ import (
 	"github.com/mitchellh/go-homedir"
 	"github.com/yelinaung/go-haikunator"
 
-	. "github.com/ibiscum/Go-for-DevOps/chapter/15/pkg/helpers"
+	. "github.com/ibiscum/Go-for-DevOps/chapter15/pkg/helpers"
 )
 
 var (

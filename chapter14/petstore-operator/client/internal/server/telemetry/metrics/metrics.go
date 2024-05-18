@@ -43,7 +43,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator/client/internal/server/log"
+	"github.com/ibiscum/Go-for-DevOps/chapter14/petstore-operator/client/internal/server/log"
 
 	"go.opentelemetry.io/otel/metric"
 )

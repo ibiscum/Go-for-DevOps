@@ -7,7 +7,7 @@ import (
 
 	dpb "google.golang.org/genproto/googleapis/type/date"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator/client/internal/server/errors"
+	"github.com/ibiscum/Go-for-DevOps/chapter14/petstore-operator/client/internal/server/errors"
 	pb "github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator/client/proto"
 )
 

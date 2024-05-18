@@ -19,13 +19,13 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter08/rollout/lb/client"
 
 	"github.com/fatih/color"
 	"github.com/pkg/sftp"
 	"golang.org/x/crypto/ssh"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/8/rollout/lb/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter08/rollout/lb/proto"
 )
 
 // endStates are the final states after a run of a workflow.

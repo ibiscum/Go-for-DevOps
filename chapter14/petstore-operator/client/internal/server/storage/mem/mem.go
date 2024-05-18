@@ -10,10 +10,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator/client/internal/server/errors"
-	"github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator/client/internal/server/log"
-	"github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator/client/internal/server/storage"
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator/client/proto"
+	"github.com/ibiscum/Go-for-DevOps/chapter14/petstore-operator/client/internal/server/errors"
+	"github.com/ibiscum/Go-for-DevOps/chapter14/petstore-operator/client/internal/server/log"
+	"github.com/ibiscum/Go-for-DevOps/chapter14/petstore-operator/client/internal/server/storage"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter14/petstore-operator/client/proto"
 
 	"github.com/biogo/store/llrb"
 )
