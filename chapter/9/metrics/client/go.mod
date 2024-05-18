@@ -28,7 +28,7 @@ require (
 	go.opentelemetry.io/otel/sdk/export/metric v0.26.0 // indirect
 	go.opentelemetry.io/otel/trace v1.3.0 // indirect
 	go.opentelemetry.io/proto/otlp v0.11.0 // indirect
-	golang.org/x/net v0.23.0 // indirect
+	golang.org/x/net v0.25.0 // indirect
 	golang.org/x/sys v0.20.0 // indirect
 	golang.org/x/text v0.15.0 // indirect
 	google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1 // indirect
