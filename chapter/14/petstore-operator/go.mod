@@ -20,7 +20,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.24.0
 	google.golang.org/genproto v0.0.0-20240213162025-012b6fc9bca9
 	google.golang.org/grpc v1.64.0
-	google.golang.org/protobuf v1.33.0
+	google.golang.org/protobuf v1.34.1
 	k8s.io/apimachinery v0.23.0
 	k8s.io/client-go v0.23.0
 	sigs.k8s.io/cluster-api v1.1.2
@@ -74,7 +74,7 @@ require (
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.19.1 // indirect
 	golang.org/x/crypto v0.21.0 // indirect
-	golang.org/x/net v0.22.0 // indirect
+	golang.org/x/net v0.23.0 // indirect
 	golang.org/x/oauth2 v0.18.0 // indirect
 	golang.org/x/sys v0.18.0 // indirect
 	golang.org/x/term v0.18.0 // indirect
