@@ -131,7 +131,7 @@ func (s *serverSheet) writeSummaries() {
 func (s *serverSheet) createCPUChart() error {
 	c := chart.New()
 	c.Type = "pie3D"
-	c.Dimension = chart.FormatChartDimension{640, 480}
+	c.Dimension = chart.FormatChartDimension{Width: 640, Height: 480}
 	c.Title = chart.FormatChartTitle{Name: "Server CPU Vendor Breakdown"}
 	c.Format = chart.FormatPicture{
 		FPrintsWithSheet: true,

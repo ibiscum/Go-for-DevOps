@@ -4,7 +4,6 @@ go 1.22.1
 
 require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1
-	github.com/ibiscum/Go-for-DevOps v0.0.0-20230118095908-3736fb903b15
 	github.com/xuri/excelize/v2 v2.8.1
 )
 
