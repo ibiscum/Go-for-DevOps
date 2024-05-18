@@ -3,7 +3,6 @@ module github.com/ibiscum/Go-for-DevOps/chapter11/petstore
 go 1.18
 
 require (
-	github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore v0.0.0-20230118095908-3736fb903b15
 	github.com/biogo/store v0.0.0-20201120204734-aad293a2328f
 	github.com/google/uuid v1.3.0
 	github.com/kylelemons/godebug v1.1.0

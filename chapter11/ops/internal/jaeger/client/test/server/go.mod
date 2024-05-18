@@ -1,4 +1,4 @@
-module github.com/PacktPublishing/Go-for-DevOps/chapter/9/tracing/demo/server
+module github.com/ibiscum/Go-for-DevOps/chapter11/jaeger/client/test/server
 
 go 1.17
 

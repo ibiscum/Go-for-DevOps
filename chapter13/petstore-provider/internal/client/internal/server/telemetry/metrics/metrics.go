@@ -43,10 +43,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/13/petstore-provider/internal/client/internal/server/log"
+	"github.com/ibiscum/Go-for-DevOps/chapter13/petstore-provider/internal/client/internal/server/log"
 
 	"go.opentelemetry.io/otel/metric"
-	"go.opentelemetry.io/otel/metric/global"
 )
 
 type metricType int

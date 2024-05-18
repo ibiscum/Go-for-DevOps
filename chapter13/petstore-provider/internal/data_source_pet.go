@@ -10,8 +10,8 @@ import (
 	"github.com/pkg/errors"
 	"google.golang.org/genproto/googleapis/type/date"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/13/petstore-provider/internal/client"
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/13/petstore-provider/internal/client/proto"
+	"github.com/ibiscum/Go-for-DevOps/chapter13/petstore-provider/internal/client"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter13/petstore-provider/internal/client/proto"
 )
 
 func dataSourcePet() *schema.Resource {

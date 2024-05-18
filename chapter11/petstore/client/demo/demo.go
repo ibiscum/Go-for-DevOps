@@ -17,8 +17,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore/client"
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore/proto"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/petstore/client"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter11/petstore/proto"
 	dpb "google.golang.org/genproto/googleapis/type/date"
 )
 

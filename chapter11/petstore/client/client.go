@@ -7,12 +7,12 @@ import (
 	"io"
 	"time"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore/internal/server/storage"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/petstore/internal/server/storage"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter11/petstore/proto"
 )
 
 // Client is a client to the petstore service.

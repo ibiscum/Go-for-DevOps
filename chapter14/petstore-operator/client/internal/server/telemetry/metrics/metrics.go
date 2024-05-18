@@ -46,7 +46,6 @@ import (
 	"github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator/client/internal/server/log"
 
 	"go.opentelemetry.io/otel/metric"
-	"go.opentelemetry.io/otel/metric/global"
 )
 
 type metricType int

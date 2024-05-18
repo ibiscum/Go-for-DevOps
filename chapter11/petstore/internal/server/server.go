@@ -9,10 +9,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore/internal/server/errors"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore/internal/server/storage"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore/internal/server/telemetry/metrics"
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore/internal/server/telemetry/tracing"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/petstore/internal/server/errors"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/petstore/internal/server/storage"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/petstore/internal/server/telemetry/metrics"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/petstore/internal/server/telemetry/tracing"
 
 	"github.com/google/uuid"
 	"go.opentelemetry.io/otel/attribute"
@@ -29,7 +29,7 @@ import (
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter11/petstore/proto"
 )
 
 // These represent all of our OTEL metric counters.

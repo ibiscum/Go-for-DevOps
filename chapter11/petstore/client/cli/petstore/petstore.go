@@ -8,10 +8,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/petstore/client"
 	"google.golang.org/protobuf/encoding/protojson"
 
-	pb "github.com/PacktPublishing/Go-for-DevOps/chapter/11/petstore/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter11/petstore/proto"
 	dpb "google.golang.org/genproto/googleapis/type/date"
 )
 
@@ -43,15 +43,15 @@ Command Search:
 		petstore search param="value" parame="value"
 	Params:
 		Names - Comma separated list of names
-		Type - Comma separated list of pet types	
+		Type - Comma separated list of pet types
 		BirthdayStart - JSON version of proto date
 		BirthdayEnd - JSON version of proto date
 
-		Note: 
+		Note:
 		If BirthdayStart is provided by not BirthdayEnd, it will
 		be set to the current date + 1 day. If the reverse,
 		BirthdayStart will be set to the Go's zero time.
-		      
+
 	Example:
 		petstore search names="Stevie Nicks, Frank" types="PTFeline" birthdayStart='{"month":1, "day":1, "year":2004}'
 `

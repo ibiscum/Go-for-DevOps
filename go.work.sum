@@ -42,6 +42,7 @@ github.com/hashicorp/vault/sdk v0.2.1/go.mod h1:WfUiO1vYzfBkz1TmoE4ZGU7HD0T0Cl/r
 github.com/hashicorp/yamux v0.0.0-20210826001029-26ff87cf9493/go.mod h1:CtWFDAQgb7dxtzFs4tWbplKIe2jSi3+5vKbgIO0SLnQ=
 github.com/huandu/xstrings v1.3.2/go.mod h1:y5/lhBue+AyNmUVz9RLU9xbLR0o4KIIExikq4ovT0aE=
 github.com/ibiscum/Go-for-DevOps v0.0.0-20230118095908-3736fb903b15/go.mod h1:ddxZqAJkgSdzEmIzyAo5Nx6UFNjzVEZt+ZflQZMJB4Q=
+github.com/ibiscum/Go-for-DevOps/chapter/11/petstore v0.0.0-20230118095908-3736fb903b15/go.mod h1:SV703m7YOQ/imYvm7hjkR5L2+SRO4SgOdNi/RYVEyqQ=
 github.com/inancgumus/screen v0.0.0-20190314163918-06e984b86ed3/go.mod h1:Ey4uAp+LvIl+s5jRbOHLcZpUDnkjLBROl15fZLwPlTM=
 github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869/go.mod h1:cJ6Cj7dQo+O6GJNiMx+Pa94qKj+TG8ONdKHgMNIyyag=
 github.com/jmespath/go-jmespath v0.4.0/go.mod h1:T8mJZnbsbmF+m6zOOFylbeCJqk5+pHWvzYPziyZiYoo=
