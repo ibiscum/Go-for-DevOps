@@ -189,6 +189,7 @@ func StatusCheck(urlPath string, healthyValues []string) (HealthCheck, error) {
 	if len(healthyValues) == 0 {
 		return nil, fmt.Errorf("must provide at least one healthy value")
 	}
+
 	return func(ctx context.Context, endpoint string) error {
 		u, err := url.Parse(endpoint)
 		if err != nil {
@@ -275,7 +276,11 @@ func NewIPBackend(ip net.IP, port int32, urlPath string) (*IPBackend, error) {
 		endpoint: fmt.Sprintf("%s:%d", ip, port),
 	}
 	i.healthState.Store(unknownHS)
-	i.resolveURL()
+	err := i.resolveURL()
+	if err != nil {
+		return nil, err
+	}
+
 	i.handle = httputil.NewSingleHostReverseProxy(i.u)
 
 	if err := i.validate(); err != nil {

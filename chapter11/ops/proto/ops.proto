@@ -5,7 +5,7 @@ package ops;
 import "google/protobuf/duration.proto";
 import "jaeger/model/model.proto";
 
-option go_package = "github.com/PacktPublishing/Go-for-DevOps/chapter/10/ops/proto";
+option go_package = "github.com/ibiscum/Go-for-DevOps/chapter/10/ops/proto";
 
 // The request to get traces from Jaeger.
 message ListTracesReq {
@@ -33,7 +33,7 @@ message TraceItem {
 	string id = 1;
 	// The time the trace started in unix nanosecods.
 	int64 start = 2;
-}	
+}
 
 // A response to ListTraces().
 message ListTracesResp {
@@ -84,7 +84,7 @@ message ChangeSamplingReq {
 	SamplerType type = 1;
 
 	// This is the sampling rate if type == STFloat. Values must be
-	// > 0 and <= 1.0 .	
+	// > 0 and <= 1.0 .
 	double float_value = 2;
 }
 

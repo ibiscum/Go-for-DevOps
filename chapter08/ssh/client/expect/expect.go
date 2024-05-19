@@ -13,9 +13,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/google/goexpect"
+	expect "github.com/google/goexpect"
 	"golang.org/x/crypto/ssh"
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 )
 
 var (
@@ -92,7 +92,7 @@ func main() {
 
 func passwordFromTerm() (ssh.AuthMethod, error) {
 	fmt.Printf("SSH Passsword: ")
-	p, err := terminal.ReadPassword(int(os.Stdin.Fd()))
+	p, err := term.ReadPassword(int(os.Stdin.Fd()))
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +125,10 @@ func installExpect(conn *ssh.Client) (err error) {
 	debug := strings.Builder{}
 	debugDone := make(chan struct{})
 	go func() {
-		io.Copy(&debug, r)
+		_, err := io.Copy(&debug, r)
+		if err != nil {
+			log.Fatal(err)
+		}
 		close(debugDone)
 	}()
 

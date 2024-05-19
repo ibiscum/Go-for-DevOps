@@ -5,13 +5,14 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"log"
 	"net"
 	"os"
 	"os/user"
 	"time"
 
 	"golang.org/x/crypto/ssh"
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 )
 
 var (
@@ -89,7 +90,7 @@ func main() {
 
 func passwordFromTerm() (ssh.AuthMethod, error) {
 	fmt.Printf("SSH Passsword: ")
-	p, err := terminal.ReadPassword(int(os.Stdin.Fd()))
+	p, err := term.ReadPassword(int(os.Stdin.Fd()))
 	if err != nil {
 		return nil, err
 	}
@@ -126,13 +127,17 @@ func combinedOutput(ctx context.Context, conn *ssh.Client, cmd string) (string, 
 	defer sess.Close()
 
 	if v, ok := ctx.Deadline(); ok {
-		t := time.NewTimer(v.Sub(time.Now()))
+
+		t := time.NewTimer(time.Until(v))
 		defer t.Stop()
 
 		go func() {
 			x := <-t.C
 			if !x.IsZero() {
-				sess.Signal(ssh.SIGKILL)
+				err := sess.Signal(ssh.SIGKILL)
+				if err != nil {
+					log.Fatal(err)
+				}
 			}
 		}()
 	}

@@ -19,7 +19,7 @@ const (
 	ping = "ping"
 	ssh  = "ssh"
 
-	uname = "uname"
+	//uname = "uname"
 )
 
 func main() {

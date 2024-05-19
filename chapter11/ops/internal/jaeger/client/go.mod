@@ -3,7 +3,6 @@ module github.com/ibiscum/Go-for-DevOps/chapter11/ops/internal/jaeger/client
 go 1.22.1
 
 require (
-	github.com/PacktPublishing/Go-for-DevOps v0.0.0-20230118095908-3736fb903b15 // indirect
 	github.com/google/uuid v1.6.0
 	github.com/ibiscum/Go-for-DevOps/chapter11/ops/proto v0.0.0-20240518182127-0761281341c6
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.51.0

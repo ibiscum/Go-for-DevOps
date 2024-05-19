@@ -30,9 +30,9 @@ type weightedBackend struct {
 	weight int32
 }
 
-func (w *weightedBackend) get() int32 {
-	return atomic.LoadInt32(&w.weight)
-}
+// func (w *weightedBackend) get() int32 {
+// 	return atomic.LoadInt32(&w.weight)
+// }
 
 func (w *weightedBackend) call() {
 	w.Backend.call()
@@ -122,8 +122,16 @@ func (s *P2C) Remove(ctx context.Context, b Backend) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	s.removeFromValue(b, s.healthy)
-	s.removeFromValue(b, s.sick)
+	err := s.removeFromValue(b, s.healthy)
+	if err != nil {
+		return err
+	}
+
+	err = s.removeFromValue(b, s.sick)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 

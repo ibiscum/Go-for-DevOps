@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io/fs"
@@ -23,6 +24,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+
 	systemdUnits = filepath.Join("/home", u.Username, ".config/systemd/user")
 	if err := os.MkdirAll(systemdUnits, 0700); err != nil {
 		panic(err)
@@ -92,10 +94,12 @@ func writeUnitFile(dbusConn *dbus.Conn, user string, req *pb.InstallReq) error {
 	// Let's only try to reload the daemon one at a time.
 	wufMu.Lock()
 	defer wufMu.Unlock()
-	return dbusConn.Reload()
+	return dbusConn.ReloadContext(context.Background())
 }
 
-func rmUnitFile(dbusConn *dbus.Conn, user string, req *pb.RemoveReq) error {
+// func rmUnitFile(dbusConn *dbus.Conn, user string, req *pb.RemoveReq) error {
+func rmUnitFile(dbusConn *dbus.Conn, req *pb.RemoveReq) error {
+
 	unit := req.Name + ".service"
 
 	p := filepath.Join(systemdUnits, unit)
@@ -110,5 +114,5 @@ func rmUnitFile(dbusConn *dbus.Conn, user string, req *pb.RemoveReq) error {
 	// Let's only try to reload the daemon one at a time.
 	wufMu.Lock()
 	defer wufMu.Unlock()
-	return dbusConn.Reload()
+	return dbusConn.ReloadContext(context.Background())
 }

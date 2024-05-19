@@ -54,14 +54,16 @@ type Agent struct {
 
 // New creates a new Agent instance.
 func New() (*Agent, error) {
-	conn, err := dbus.NewUserConnection()
+	conn, err := dbus.NewUserConnectionContext(context.Background())
 	if err != nil {
 		return nil, fmt.Errorf("problem connecting to systemd: %w", err)
 	}
+
 	u, err := user.Current()
 	if err != nil {
 		return nil, err
 	}
+
 	return &Agent{
 		dbus:  conn,
 		user:  u.Username,
@@ -127,7 +129,8 @@ func (a *Agent) Remove(ctx context.Context, req *pb.RemoveReq) (*pb.RemoveResp, 
 		return nil, err
 	}
 
-	if err := rmUnitFile(a.dbus, a.user, req); err != nil {
+	// if err := rmUnitFile(a.dbus, a.user, req); err != nil {
+	if err := rmUnitFile(a.dbus, req); err != nil {
 		return nil, err
 	}
 	return &pb.RemoveResp{}, nil
