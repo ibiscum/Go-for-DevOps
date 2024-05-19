@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package petstore;
 
-option go_package = "github.com/PacktPublishing/Go-for-DevOps/proto";
+option go_package = "github.com/ibiscum/Go-for-DevOps/chapter11/proto";
 
 import "google/type/date.proto";
 
@@ -93,7 +93,7 @@ message Sampler {
 	SamplerType type = 1;
 
 	// This is the sampling rate if type == STFloat. Values must be
-	// > 0 and <= 1.0 .	
+	// > 0 and <= 1.0 .
 	double float_value = 2;
 }
 
