@@ -18,8 +18,10 @@ use (
 	./chapter09/tracing/client
 	./chapter09/tracing/server
 	./chapter10
+	./chapter11/ops/internal/jaeger/client
 	./chapter11/ops/internal/jaeger/client/test/server
 	./chapter11/ops/proto
+	./chapter11/ops/proto/jaeger/model
 	./chapter11/petstore
 	./chapter13/petstore-provider
 	./chapter14/petstore-operator

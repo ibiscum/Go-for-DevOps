@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/PacktPublishing/Go-for-DevOps/chapter/11/ops/internal/jaeger/client"
-	httpClient "github.com/PacktPublishing/Go-for-DevOps/chapter/11/ops/internal/jaeger/client/test/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/ops/internal/jaeger/client"
+	httpClient "github.com/ibiscum/Go-for-DevOps/chapter11/ops/internal/jaeger/client/test/client"
 )
 
 func TestTrace(t *testing.T) {

@@ -3,9 +3,15 @@ module github.com/ibiscum/Go-for-DevOps/chapter16/workflow/client
 go 1.22.1
 
 require (
-	github.com/cenkalti/backoff v2.1.1+incompatible
+	github.com/cenkalti/backoff v2.2.1+incompatible
 	google.golang.org/grpc v1.64.0
 	google.golang.org/protobuf v1.34.1
+)
+
+require (
+	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
+	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
+	github.com/stretchr/testify v1.9.0 // indirect
 )
 
 require (
