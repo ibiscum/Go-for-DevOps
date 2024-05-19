@@ -4,6 +4,7 @@ go 1.22.1
 
 require (
 	github.com/fatih/color v1.17.0
+	github.com/ibiscum/Go-for-DevOps/chapter08/rollout/lb/proto v0.0.0-20240519044028-ad446a0c8b36
 	google.golang.org/grpc v1.64.0
 )
 

@@ -10,9 +10,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/policy"
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/policy"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/service/jobs"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/proto"
 )
 
 // This registers our policy with the service.
@@ -47,10 +47,10 @@ func (s Settings) Validate() error {
 	}
 
 	if s.Start && s.End {
-		return fmt.Errorf("Start and End cannot both be true")
+		return fmt.Errorf("start and end cannot both be true")
 	}
 	if !s.Start && !s.End {
-		return fmt.Errorf("either Start of End must be set")
+		return fmt.Errorf("either start or end must be set")
 	}
 
 	for _, name := range s.AllowedBeforeOrAfter {

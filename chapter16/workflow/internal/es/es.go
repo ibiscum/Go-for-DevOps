@@ -3,6 +3,7 @@ Package es contains an emergency stop implementation. This data is read from es.
 every 10 seconds. If the data changes, subscribers will receive an update.
 
 Using this is simple:
+
 	ch, cancel := es.Data.Subscribe("SatelliteDiskErase")
 	defer cancel()
 
@@ -154,7 +155,7 @@ func (r *Reader) Status(name string) Status {
 // loop reads the es.json file in every 10 seconds and updates subscribers of changes
 // from Go status to Stop status.
 func (r *Reader) loop() {
-	for _ = range time.Tick(10 * time.Second) {
+	for range time.Tick(10 * time.Second) {
 		newInfos, err := r.load()
 		if err != nil {
 			// This means the file was malformed or missing. In these
@@ -202,8 +203,8 @@ func (r *Reader) sendStop(name string) {
 				}
 			}
 		}
-		close(ch)
-		delete(r.subscribers, name)
+		// close(ch)
+		// delete(r.subscribers, name)
 	}
 }
 

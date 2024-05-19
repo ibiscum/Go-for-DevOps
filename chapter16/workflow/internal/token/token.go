@@ -35,7 +35,7 @@ func New(size, incr int, interval time.Duration) (*Bucket, error) {
 	// opposite logic of what you'd expect, but this is actually an efficient way of implementing
 	// a token Bucket usign channels.
 	go func() {
-		for _ = range b.ticker.C {
+		for range b.ticker.C {
 			for i := 0; i < incr; i++ {
 				select {
 				case <-b.tokens:

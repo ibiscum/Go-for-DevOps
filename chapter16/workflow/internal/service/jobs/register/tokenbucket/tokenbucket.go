@@ -18,11 +18,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/data/packages/sites"
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/token"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/data/packages/sites"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/service/jobs"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/token"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/proto"
 )
 
 var buckets = map[string]*token.Bucket{}

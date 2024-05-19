@@ -35,7 +35,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/policy"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/policy"
 )
 
 // Policies provides the policy Reader that can be used to read the current policy.
@@ -168,7 +168,7 @@ func (r *Reader) Read() (Config, error) {
 }
 
 func (r *Reader) update() {
-	for _ = range time.Tick(10 * time.Second) {
+	for range time.Tick(10 * time.Second) {
 		if err := r.load(); err != nil {
 			c := r.conf.Load().(Config)
 			c.err = err

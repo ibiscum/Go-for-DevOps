@@ -23,7 +23,7 @@ import (
 	"log"
 	"strings"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/proto"
 )
 
 var jobs = map[string]Job{}

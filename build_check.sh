@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Running this file will recursively dive into every directory that has a .go file
-# and run "go test" in that directory. 
+# and run "go test" in that directory.
 # Note: this will fail on the k8 stuff, as it has a complicated test setup.
 
 root=`pwd`
@@ -11,7 +11,7 @@ for d in `find . -type d -print`; do
 	cd "$root/$d";
 
 	goDir=false;
-	for file in `find . -type f -name '*.go' -maxdepth 1 -print`; do
+	for file in `find . -maxdepth 1 -type f -name '*.go' -print`; do
 		goDir=true;
 		break;
 	done;

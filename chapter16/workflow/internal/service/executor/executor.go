@@ -27,13 +27,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/es"
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/policy"
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/policy/config"
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/es"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/policy"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/policy/config"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/service/jobs"
 	"google.golang.org/protobuf/proto"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/proto"
 )
 
 // Work is an executor for executing a WorkReq received by the server.
@@ -159,6 +159,7 @@ func (w *Work) sendStatus(status *pb.StatusResp) {
 
 func (w *Work) runJobs(ctx context.Context, block *pb.Block, blockStatus *pb.BlockStatus) error {
 	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
 
 	// Setup our rate limiter.
 	limit := block.RateLimit
@@ -248,7 +249,7 @@ func Validate(ctx context.Context, req *pb.WorkReq) error {
 	}
 	workConf, ok := conf.Workflows[req.Name]
 	if !ok {
-		return fmt.Errorf("Workflow does not have an associated policy in the policy configuration file")
+		return fmt.Errorf("workflow does not have an associated policy in the policy configuration file")
 	}
 
 	args := make([]policy.PolicyArgs, 0, len(workConf.Policies))

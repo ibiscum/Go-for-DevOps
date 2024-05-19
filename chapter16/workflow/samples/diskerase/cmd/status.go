@@ -26,13 +26,13 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/client"
 
 	"github.com/fatih/color"
 	"github.com/inancgumus/screen"
 	"github.com/spf13/cobra"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/proto"
 )
 
 // statusCmd represents the status command

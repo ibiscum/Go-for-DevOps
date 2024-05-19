@@ -139,9 +139,8 @@ func generateWork(sat string) (*pb.WorkReq, error) {
 
 	// Get a list of machines for the site, in alphabetical order.
 	machines := make([]sites.Machine, 0, len(site.Machines))
-	for _, m := range site.Machines {
-		machines = append(machines, m)
-	}
+	machines = append(machines, site.Machines...)
+
 	sort.SliceStable(
 		machines,
 		func(i, j int) bool {

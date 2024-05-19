@@ -17,10 +17,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/data/packages/sites"
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/data/packages/sites"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/service/jobs"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/proto"
 )
 
 // This registers our Job on server startup.

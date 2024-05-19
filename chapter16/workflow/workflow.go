@@ -8,25 +8,25 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/data/packages/sites"
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/policy/config"
-	"github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/data/packages/sites"
 	"google.golang.org/grpc"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/proto"
 
 	// These register all our job types, as each has an init() that registers the Job with
 	// the service. This is called a side effects import, because we don't actually use it.
 	// The _ before the package indicates it will not be used directly.
-	_ "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs/register/diskerase"
-	_ "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs/register/sleep"
-	_ "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs/register/tokenbucket"
-	_ "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/service/jobs/register/validatedecom"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/service"
+	_ "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/service/jobs/register/diskerase"
+	_ "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/service/jobs/register/sleep"
+	_ "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/service/jobs/register/tokenbucket"
+	_ "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/service/jobs/register/validatedecom"
 
 	// These register all our policies, exactly like our Jobs work.
-	_ "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/policy/register/restrictjobtypes"
-	_ "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/policy/register/sameargs"
-	_ "github.com/ibiscum/Go-for-DevOps/chapter/16/workflow/internal/policy/register/startorend"
+	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/policy/config"
+	_ "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/policy/register/restrictjobtypes"
+	_ "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/policy/register/sameargs"
+	_ "github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/policy/register/startorend"
 )
 
 var (
