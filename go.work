@@ -16,5 +16,4 @@ use (
 	./chapter14/workloads
 	./chapter15
 	./chapter16
-	./chapter16/workflow/samples/diskerase/cmd
 )
