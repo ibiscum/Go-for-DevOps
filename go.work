@@ -2,9 +2,7 @@ go 1.22.1
 
 use (
 	./chapter05/excel
-	./chapter06/grpc/client
-	./chapter06/grpc/proto
-	./chapter06/grpc/server
+	./chapter06/grpc
 	./chapter07
 	./chapter08
 	./chapter08/rollout/lb/client

@@ -26,8 +26,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter06/grpc/client"
-
+	"github.com/ibiscum/Go-for-DevOps/chapter07/grpc/client"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
