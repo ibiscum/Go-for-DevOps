@@ -252,7 +252,7 @@ func (a *Agent) migrate(req *pb.InstallReq, loc string) error {
 func (a *Agent) startProgram(ctx context.Context, name string) error {
 	// EnableUnitFiles(files []string, runtime bool, force bool) (bool, []EnableUnitFileChange, error)
 	result := make(chan string, 1)
-	id, err := a.dbus.StartUnit(name+serviceExt, "replace", result)
+	id, err := a.dbus.StartUnitContext(ctx, name+serviceExt, "replace", result)
 	if err != nil {
 		return fmt.Errorf("could not start the unit: %w", err)
 	}
@@ -286,7 +286,7 @@ func (a *Agent) startProgram(ctx context.Context, name string) error {
 // stopProgram stops a program under systemd.
 func (a *Agent) stopProgram(ctx context.Context, name string) error {
 	result := make(chan string, 1)
-	_, err := a.dbus.StopUnit(name+serviceExt, "replace", result)
+	_, err := a.dbus.StopUnitContext(ctx, name+serviceExt, "replace", result)
 	if err != nil {
 		return fmt.Errorf("could not stop the service: %w", err)
 	}

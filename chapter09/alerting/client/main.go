@@ -12,15 +12,19 @@ import (
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
-	"go.opentelemetry.io/otel/exporters/otlp/otlpmetric"
+	// "go.opentelemetry.io/otel/metric/global"
+
+	// "go.opentelemetry.io/otel/exporters/otlp/otlpmetric"
 	"go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/propagation"
-	controller "go.opentelemetry.io/otel/sdk/metric/controller/basic"
-	processor "go.opentelemetry.io/otel/sdk/metric/processor/basic"
-	"go.opentelemetry.io/otel/sdk/metric/selector/simple"
+
+	// controller "go.opentelemetry.io/otel/sdk/metric/controller/basic"
+	// processor "go.opentelemetry.io/otel/sdk/metric/processor/basic"
+	// "go.opentelemetry.io/otel/sdk/metric/selector/simple"
+	// "go.opentelemetry.io/otel/sdk/metric/selector/simple"
 	"go.opentelemetry.io/otel/sdk/resource"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
@@ -64,7 +68,7 @@ func initTracer(ctx context.Context, otelAgentAddr string) func(context.Context)
 		otlptracegrpc.WithEndpoint(otelAgentAddr),
 		otlptracegrpc.WithDialOption(grpc.WithBlock()))
 	traceExp, err := otlptrace.New(ctx, traceClient)
-	handleErr(err, "Failed to create the collector trace exporter")
+	handleErr(err, "failed to create the collector trace exporter")
 
 	res, err := resource.New(ctx,
 		resource.WithFromEnv(),
@@ -101,7 +105,7 @@ func initMetrics(ctx context.Context, otelAgentAddr string) func(context.Context
 	metricClient := otlpmetricgrpc.NewClient(
 		otlpmetricgrpc.WithInsecure(),
 		otlpmetricgrpc.WithEndpoint(otelAgentAddr))
-	metricExp, err := otlpmetric.New(ctx, metricClient)
+	metricExp, err := otlpmetricgrpc.New(ctx, metricClient)
 	handleErr(err, "Failed to create the collector metric exporter")
 
 	res, err := resource.New(ctx,
@@ -115,25 +119,26 @@ func initMetrics(ctx context.Context, otelAgentAddr string) func(context.Context
 			semconv.ServiceNameKey.String("demo-client"),
 		),
 	)
-	pusher := controller.New(
-		processor.NewFactory(
-			simple.NewWithHistogramDistribution(),
-			metricExp,
-		),
-		controller.WithExporter(metricExp),
-		controller.WithCollectPeriod(2*time.Second),
-		controller.WithResource(res),
-	)
-	global.SetMeterProvider(pusher)
 
-	err = pusher.Start(ctx)
+	// pusher := controller.New(
+	// 	processor.NewFactory(
+	// 		simple.NewWithHistogramDistribution(),
+	// 		metricExp,
+	// 	),
+	// 	controller.WithExporter(metricExp),
+	// 	controller.WithCollectPeriod(2*time.Second),
+	// 	controller.WithResource(res),
+	// )
+	// global.SetMeterProvider(pusher)
+
+	// err = pusher.Start(ctx)
 	handleErr(err, "Failed to start metric pusher")
 
 	return func(doneCtx context.Context) {
 		// pushes any last exports to the receiver
-		if err := pusher.Stop(doneCtx); err != nil {
-			otel.Handle(err)
-		}
+		// if err := pusher.Stop(doneCtx); err != nil {
+		// 	otel.Handle(err)
+		// }
 	}
 }
 
@@ -148,8 +153,8 @@ func handleErr(err error, message string) {
 func continuouslySendRequests() {
 	var (
 		tracer       = otel.Tracer("demo-client-tracer")
-		meter        = global.Meter("demo-client-meter")
-		instruments  = NewClientInstruments(meter)
+		// meter        = global.Meter("demo-client-meter")
+		// instruments  = NewClientInstruments(meter)
 		commonLabels = []attribute.KeyValue{
 			attribute.String("method", "repl"),
 			attribute.String("client", "cli"),

@@ -17,6 +17,7 @@ import (
 	"github.com/johnsiilver/serveonssh"
 	"golang.org/x/crypto/ssh"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 
 	pb "github.com/ibiscum/Go-for-DevOps/chapter08/agent/proto"
 )
@@ -48,14 +49,21 @@ func New(endpoint string, auth []ssh.AuthMethod) (*Client, error) {
 		return nil, err
 	}
 
-	opts := []grpc.DialOption{
-		grpc.WithInsecure(),
-		grpc.WithDialer(func(addr string, timeout time.Duration) (net.Conn, error) {
-			return p.Dialer()()
-		}),
+
+	//ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	//defer cancel()
+
+	dialer := func(ctx context.Context, addr string) (net.Conn, error) {
+		return (&net.Dialer{}).DialContext(ctx, "unix", addr)
 	}
 
-	conn, err := grpc.Dial("not needed", opts...)
+	opts := []grpc.DialOption{
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithContextDialer(dialer),
+	}
+
+	// timeout for initial ClientConn
+	conn, err := grpc.NewClient(endpoint, opts...)
 	if err != nil {
 		return nil, err
 	}
