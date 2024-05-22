@@ -14,20 +14,7 @@ use (
 	./chapter13/petstore-provider
 	./chapter14/petstore-operator
 	./chapter14/workloads
-	./chapter15/pkg/helpers
-	./chapter15/pkg/mgmt
-	./chapter16/workflow/client
-	./chapter16/workflow/data/packages/sites
-	./chapter16/workflow/internal/es
-	./chapter16/workflow/internal/policy
-	./chapter16/workflow/internal/policy/config
-	./chapter16/workflow/internal/policy/register/restrictjobtypes
-	./chapter16/workflow/internal/policy/register/sameargs
-	./chapter16/workflow/internal/policy/register/startorend
-	./chapter16/workflow/internal/service
-	./chapter16/workflow/internal/service/executor
-	./chapter16/workflow/internal/service/jobs
-	./chapter16/workflow/internal/token
-	./chapter16/workflow/proto
+	./chapter15
+	./chapter16
 	./chapter16/workflow/samples/diskerase/cmd
 )

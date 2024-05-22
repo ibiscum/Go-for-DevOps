@@ -31,8 +31,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	petstorev1alpha1 "github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator/api/v1alpha1"
-	"github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator/controllers"
+	petstorev1alpha1 "github.com/ibiscum/Go-for-DevOps/chapter14/petstore-operator/api/v1alpha1"
+	"github.com/ibiscum/Go-for-DevOps/chapter14/petstore-operator/controllers"
 	//+kubebuilder:scaffold:imports
 )
 
