@@ -47,6 +47,7 @@ import (
 
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/global"
+	// "go.opentelemetry.io/otel/metric/global"
 )
 
 type metricType int

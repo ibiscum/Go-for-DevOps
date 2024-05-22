@@ -27,8 +27,8 @@ import (
 	"sync"
 	"syscall"
 
-	"github.com/aelsabbahy/goss"
-	"github.com/aelsabbahy/goss/resource"
+	"github.com/goss-org/goss"
+	"github.com/goss-org/goss/resource"
 	"gopkg.in/yaml.v2"
 )
 
