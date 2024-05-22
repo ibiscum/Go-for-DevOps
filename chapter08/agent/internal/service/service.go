@@ -111,7 +111,7 @@ func (a *Agent) Install(ctx context.Context, req *pb.InstallReq) (*pb.InstallRes
 		return nil, err
 	}
 
-	if err := a.migrate(req, loc); err != nil {
+	if err := a.migrate(ctx, req, loc); err != nil {
 		return nil, err
 	}
 
@@ -219,11 +219,11 @@ func (a *Agent) writeFile(z *zip.File, dir string) error {
 
 // migrate shuts down any existing job that is running and migrates our files
 // from the temp location to the final location.
-func (a *Agent) migrate(req *pb.InstallReq, loc string) error {
-	units, err := a.dbus.ListUnitsByNames([]string{req.Name + serviceExt})
+func (a *Agent) migrate(ctx context.Context, req *pb.InstallReq, loc string) error {
+	units, err := a.dbus.ListUnitsByNamesContext(ctx, []string{req.Name + serviceExt})
 	if err == nil && units[0].JobId != 0 {
 		result := make(chan string, 1)
-		_, err := a.dbus.StopUnit(req.Name+serviceExt, "replace", result)
+		_, err := a.dbus.StopUnitContext(ctx, req.Name+serviceExt, "replace", result)
 		if err != nil {
 			return fmt.Errorf("migate could not stop the service: %w", err)
 		}
@@ -264,7 +264,7 @@ func (a *Agent) startProgram(ctx context.Context, name string) error {
 	}
 
 	time.Sleep(30 * time.Second)
-	statuses, err := a.dbus.ListUnitsByNames([]string{name + serviceExt})
+	statuses, err := a.dbus.ListUnitsByNamesContext(ctx, []string{name + serviceExt})
 	if err != nil {
 		return fmt.Errorf("could not find unit after start: %s", err)
 	}

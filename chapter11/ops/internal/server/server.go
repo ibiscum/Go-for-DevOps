@@ -19,8 +19,8 @@ import (
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/protobuf/types/known/durationpb"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter/11/ops/proto"
-	mpb "github.com/ibiscum/Go-for-DevOps/chapter/11/ops/proto/jaeger/model"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter11/ops/proto"
+	mpb "github.com/ibiscum/Go-for-DevOps/chapter11/ops/proto/jaeger/model"
 )
 
 // API implements our gRPC server's API.
@@ -48,13 +48,13 @@ type Clients struct {
 
 func (c Clients) validate() error {
 	if c.Jaeger == nil {
-		return errors.New("Jaeger cannot be nil")
+		return errors.New("jaeger cannot be nil")
 	}
 	if c.Prom == nil {
-		return errors.New("Prom cannot be nil")
+		return errors.New("prom cannot be nil")
 	}
 	if c.Petstore == nil {
-		return errors.New("PetStore cannot be nil")
+		return errors.New("petstore cannot be nil")
 	}
 	return nil
 }
@@ -135,9 +135,9 @@ func (a *API) ListTraces(ctx context.Context, req *pb.ListTracesReq) (*pb.ListTr
 
 	resp := &pb.ListTracesResp{}
 	for trace := range ch {
-		if len(trace.Spans) < 0 {
-			continue
-		}
+		// if len(trace.Spans) < 0 {
+		// 	continue
+		// }
 		if trace.Err != nil {
 			return nil, trace.Err
 		}
@@ -149,10 +149,7 @@ func (a *API) ListTraces(ctx context.Context, req *pb.ListTracesReq) (*pb.ListTr
 	sort.Slice(
 		resp.Traces,
 		func(i, j int) bool {
-			if resp.Traces[i].Start > resp.Traces[j].Start {
-				return true
-			}
-			return false
+			return resp.Traces[i].Start > resp.Traces[j].Start
 		},
 	)
 	return resp, nil

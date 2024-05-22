@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/11/chatbot/bot"
-	"github.com/ibiscum/Go-for-DevOps/chapter/11/chatbot/internal/handlers"
-	"github.com/ibiscum/Go-for-DevOps/chapter/11/ops/client"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/chatbot/bot"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/chatbot/internal/handlers"
+	"github.com/ibiscum/Go-for-DevOps/chapter11/ops/client"
 
 	"github.com/joho/godotenv"
 	"github.com/slack-go/slack"

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net"
 	"net/http"
 	"net/url"
@@ -313,11 +314,11 @@ func (a *actions) jobKill(ctx context.Context) (stateFn, error) {
 		return nil, fmt.Errorf("failed to kill existing PIDs: %w", err)
 	}
 
-	if err := a.waitForDeath(ctx, pids, 30*time.Second); err != nil {
+	if err := a.waitForDeath(ctx, 30*time.Second); err != nil {
 		if err := a.killPIDs(ctx, pids, 9); err != nil {
 			return nil, fmt.Errorf("failed to kill existing PIDs: %w", err)
 		}
-		if err := a.waitForDeath(ctx, pids, 10*time.Second); err != nil {
+		if err := a.waitForDeath(ctx, 10*time.Second); err != nil {
 			return nil, fmt.Errorf("failed to kill existing PIDs after -9: %w", err)
 		}
 		return a.cp, nil
@@ -333,7 +334,7 @@ func (a *actions) cp(ctx context.Context) (stateFn, error) {
 }
 
 func (a *actions) jobStart(ctx context.Context) (stateFn, error) {
-	if err := a.runBinary(ctx); err != nil {
+	if err := a.runBinary(); err != nil {
 		return nil, fmt.Errorf("failed to start binary after copy: %w", err)
 	}
 	return a.reachable(ctx)
@@ -423,7 +424,8 @@ func (a *actions) killPIDs(ctx context.Context, pids []string, signal syscall.Si
 	return nil
 }
 
-func (a *actions) waitForDeath(ctx context.Context, pids []string, timeout time.Duration) error {
+// func (a *actions) waitForDeath(ctx context.Context, pids []string, timeout time.Duration) error {
+func (a *actions) waitForDeath(ctx context.Context, timeout time.Duration) error {
 	t := time.NewTimer(timeout)
 	defer t.Stop()
 	for {
@@ -445,9 +447,10 @@ func (a *actions) waitForDeath(ctx context.Context, pids []string, timeout time.
 	}
 }
 
-func (a *actions) runBinary(ctx context.Context) error {
+// func (a *actions) runBinary(ctx context.Context) error {
+func (a *actions) runBinary() error {
+
 	err := a.startOnly(
-		ctx,
 		a.sshClient,
 		fmt.Sprintf("/usr/bin/nohup %s &", a.config.Dst),
 	)
@@ -492,13 +495,16 @@ func (*actions) combinedOutput(ctx context.Context, conn *ssh.Client, cmd string
 	defer sess.Close()
 
 	if v, ok := ctx.Deadline(); ok {
-		t := time.NewTimer(v.Sub(time.Now()))
+		// t := time.NewTimer(v.Sub(time.Now()))
+		t := time.NewTimer(time.Until(v))
+
 		defer t.Stop()
 
 		go func() {
 			x := <-t.C
 			if !x.IsZero() {
-				sess.Signal(ssh.SIGKILL)
+				err := sess.Signal(ssh.SIGKILL)
+				log.Fatal(err)
 			}
 		}()
 	}
@@ -510,7 +516,9 @@ func (*actions) combinedOutput(ctx context.Context, conn *ssh.Client, cmd string
 	return string(b), nil
 }
 
-func (*actions) startOnly(ctx context.Context, conn *ssh.Client, cmd string) error {
+// func (*actions) startOnly(ctx context.Context, conn *ssh.Client, cmd string) error {
+func (*actions) startOnly(conn *ssh.Client, cmd string) error {
+
 	sess, err := conn.NewSession()
 	if err != nil {
 		return fmt.Errorf("could not start new SSH session: %w", err)

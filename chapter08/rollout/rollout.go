@@ -151,7 +151,7 @@ func setup() (*config, *workflow, error) {
 
 	lb, err := client.New(config.LB)
 	if err != nil {
-		return nil, nil, fmt.Errorf("can't connected to LB(%s): %s\n", config.LB, err)
+		return nil, nil, fmt.Errorf("can't connected to LB(%s): %s", config.LB, err)
 	}
 	wf, err := newWorkflow(config, lb)
 	if err != nil {
