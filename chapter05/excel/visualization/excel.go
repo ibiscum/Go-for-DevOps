@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"reflect"
 	"strconv"
 	"sync"
 	"time"
@@ -161,15 +162,10 @@ func (s *serverSheet) createCPUChart() error {
 		},
 	)
 
-	// b, err := json.Marshal(c)
-	// if err != nil {
-	// 	return err
-	// }
+	b := excelize.Chart{}
+	copyCommonFields(&b, c)
 
-	// if err := s.xlsx.AddChart(s.sheetName, "I1", string(b)); err != nil {
-	// 	return err
-	// }
-	if err := s.xlsx.AddChart(s.sheetName, "I1", *c); err != nil {
+	if err := s.xlsx.AddChart(s.sheetName, "I1", &b); err != nil {
 		return err
 	}
 
@@ -184,4 +180,21 @@ func mustParse(s string) time.Time {
 		panic(err)
 	}
 	return t
+}
+
+// copyCommonFields copies the common fields from the struct
+// pointed to srcp to the struct pointed to by destp.
+func copyCommonFields(destp, srcp interface{}) {
+	destv := reflect.ValueOf(destp).Elem()
+	srcv := reflect.ValueOf(srcp).Elem()
+
+	destt := destv.Type()
+	for i := 0; i < destt.NumField(); i++ {
+		sf := destt.Field(i)
+		v := srcv.FieldByName(sf.Name)
+		if !v.IsValid() || !v.Type().AssignableTo(sf.Type) {
+			continue
+		}
+		destv.Field(i).Set(v)
+	}
 }
