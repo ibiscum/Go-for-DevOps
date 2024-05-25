@@ -35,8 +35,8 @@ func (bi birthdays) Compare(b llrb.Comparable) int {
 
 	// Ignore errors because we have to conform to a function def
 	// and we should not be storing records with errors in the Birthday.
-	at, _ := storage.BirthdayToTime(nil, ap.Birthday)
-	bt, _ := storage.BirthdayToTime(nil, bp.Birthday)
+	at, _ := storage.BirthdayToTime(context.TODO(), ap.Birthday)
+	bt, _ := storage.BirthdayToTime(context.TODO(), bp.Birthday)
 
 	switch {
 	case at.Before(bt):
@@ -56,17 +56,17 @@ type birthdayGet struct {
 func (bi birthdayGet) Compare(b llrb.Comparable) int {
 	// Ignore errors because we have to conform to a function def
 	// and we should not be storing records with errors in the Birthday.
-	at, _ := storage.BirthdayToTime(nil, bi.Pet.Birthday)
+	at, _ := storage.BirthdayToTime(context.TODO(), bi.Pet.Birthday)
 	var bt time.Time
 	switch v := b.(type) {
 	case birthdayGet:
-		bt, _ = storage.BirthdayToTime(nil, v.Pet.Birthday)
+		bt, _ = storage.BirthdayToTime(context.TODO(), v.Pet.Birthday)
 	case birthdays:
 		var p *pb.Pet
 		for _, p = range v {
 			break
 		}
-		bt, _ = storage.BirthdayToTime(nil, p.Birthday)
+		bt, _ = storage.BirthdayToTime(context.TODO(), p.Birthday)
 	}
 
 	switch {

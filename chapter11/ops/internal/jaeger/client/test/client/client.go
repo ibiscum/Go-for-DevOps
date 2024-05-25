@@ -18,7 +18,6 @@ import (
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 	"go.opentelemetry.io/otel/trace"
-	"google.golang.org/grpc"
 )
 
 // NestedSpans is the number of nested spans to create. Ths is set to 2560, because for some
@@ -44,8 +43,8 @@ func initProvider() func() {
 func initTracer(ctx context.Context, otelAgentAddr string) *otlptrace.Exporter {
 	traceClient := otlptracegrpc.NewClient(
 		otlptracegrpc.WithInsecure(),
-		otlptracegrpc.WithEndpoint(otelAgentAddr),
-		otlptracegrpc.WithDialOption(grpc.WithBlock(), grpc.WithTimeout(time.Second)))
+		otlptracegrpc.WithEndpoint(otelAgentAddr))
+	// otlptracegrpc.WithDialOption(grpc.WithBlock(), grpc.WithTimeout(time.Second)))
 	traceExp, err := otlptrace.New(ctx, traceClient)
 	handleErr(err, "Failed to create the collector trace exporter")
 

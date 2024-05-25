@@ -17,7 +17,6 @@ import (
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 	"go.opentelemetry.io/otel/trace"
-	"google.golang.org/grpc"
 )
 
 // Initializes an OTLP exporter, and configures the corresponding trace providers.
@@ -42,8 +41,8 @@ func initProvider() func() {
 func initTracer(ctx context.Context, otelAgentAddr string) *otlptrace.Exporter {
 	traceClient := otlptracegrpc.NewClient(
 		otlptracegrpc.WithInsecure(),
-		otlptracegrpc.WithEndpoint(otelAgentAddr),
-		otlptracegrpc.WithDialOption(grpc.WithBlock()))
+		otlptracegrpc.WithEndpoint(otelAgentAddr))
+	//otlptracegrpc.WithDialOption(grpc.WithBlock()))
 	traceExp, err := otlptrace.New(ctx, traceClient)
 	handleErr(err, "Failed to create the collector trace exporter")
 

@@ -10,6 +10,7 @@ import (
 	"github.com/ibiscum/Go-for-DevOps/chapter11/petstore/internal/server/storage"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 
 	pb "github.com/ibiscum/Go-for-DevOps/chapter11/petstore/proto"
@@ -23,7 +24,7 @@ type Client struct {
 
 // New is the constructor for Client. addr is the server's [host]:[port].
 func New(addr string) (*Client, error) {
-	conn, err := grpc.Dial(addr, grpc.WithInsecure())
+	conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
 	}
@@ -206,7 +207,7 @@ func (s *Sampler) validate() error {
 	}
 	if s.Type == Float {
 		if s.Rate <= 0 || s.Rate > 1 {
-			return fmt.Errorf("Rate must be > 0 && <= 1.0, was %v", s.Rate)
+			return fmt.Errorf("rate must be > 0 && <= 1.0, was %v", s.Rate)
 		}
 	}
 	return nil
@@ -219,10 +220,10 @@ func (s *Sampler) proto() *pb.Sampler {
 	}
 }
 
-func (s *Sampler) fromProto(p *pb.Sampler) {
-	s.Type = SamplerType(p.Type)
-	s.Rate = p.FloatValue
-}
+// func (s *Sampler) fromProto(p *pb.Sampler) {
+// 	s.Type = SamplerType(p.Type)
+// 	s.Rate = p.FloatValue
+// }
 
 // ChangeSampler changes the sampling type and rate on the server. This is
 // and admin function that in production should be restricted.

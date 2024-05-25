@@ -37,7 +37,6 @@ import (
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 	"go.opentelemetry.io/otel/trace"
-	"google.golang.org/grpc"
 
 	"github.com/ibiscum/Go-for-DevOps/chapter13/petstore-provider/internal/client/internal/server/telemetry/tracing/sampler"
 )
@@ -168,7 +167,7 @@ func otelGRPC(ctx context.Context, e OTELGRPC) (sdktrace.SpanExporter, error) { 
 		otlptracegrpc.NewClient(
 			otlptracegrpc.WithInsecure(),
 			otlptracegrpc.WithEndpoint(e.Addr),
-			otlptracegrpc.WithDialOption(grpc.WithBlock()),
+			//otlptracegrpc.WithDialOption(grpc.WithBlock()),
 		),
 	)
 	if err != nil {

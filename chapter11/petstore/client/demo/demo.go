@@ -86,7 +86,8 @@ func addNames(ctx context.Context, c *client.Client, names []string) {
 		if t == 5 {
 			t = 1
 		}
-		start.Add(24 * time.Hour)
+		t := start.Add(24 * time.Hour)
+		log.Println(t)
 		time.Sleep(500 * time.Millisecond)
 	}
 }

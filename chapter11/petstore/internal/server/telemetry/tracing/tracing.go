@@ -2,6 +2,7 @@
 Package tracing provides functions for starting and stopping our Open Telemetry tracing.
 This package is intended to be used from main and is simple to use. We offer a few
 choices on where traces export to. Here is an example to trace to stderr for all requests:
+
 	func main() {
 		ctx := context.Background()
 		// Set us up to always sample. The "trace" package is: "petstore/server/SearchPets/latency"
@@ -38,7 +39,6 @@ import (
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 	"go.opentelemetry.io/otel/trace"
-	"google.golang.org/grpc"
 )
 
 // Tracer is the tracer initialized by Start().
@@ -167,7 +167,7 @@ func otelGRPC(ctx context.Context, e OTELGRPC) (sdktrace.SpanExporter, error) { 
 		otlptracegrpc.NewClient(
 			otlptracegrpc.WithInsecure(),
 			otlptracegrpc.WithEndpoint(e.Addr),
-			otlptracegrpc.WithDialOption(grpc.WithBlock()),
+			//otlptracegrpc.WithDialOption(grpc.WithBlock()),
 		),
 	)
 	if err != nil {
