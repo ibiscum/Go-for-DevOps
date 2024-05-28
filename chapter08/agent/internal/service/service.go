@@ -14,6 +14,7 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
+	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -177,8 +178,10 @@ func (a *Agent) unpack(name string, zipFile []byte) (string, error) {
 	// Iterate through the files in the archive,
 	// printing some of their contents.
 	for _, f := range r.File {
-		if err := a.writeFile(f, dir); err != nil {
-			return "", err
+		if !strings.Contains(f.Name, "..") {
+			if err := a.writeFile(f, dir); err != nil {
+				return "", err
+			}
 		}
 	}
 	return dir, nil
