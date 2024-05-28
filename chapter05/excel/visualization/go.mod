@@ -1,11 +1,8 @@
-module github.com/ibiscum/Go-for-DevOps/chapter05/excel
+module github.com/ibiscum/Go-for-DevOps/chapter05/excel/visualization
 
 go 1.22.1
 
-require (
-	github.com/360EntSecGroup-Skylar/excelize v1.4.1
-	github.com/xuri/excelize/v2 v2.8.1
-)
+require github.com/xuri/excelize/v2 v2.8.1
 
 require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
