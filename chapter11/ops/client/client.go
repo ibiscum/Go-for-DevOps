@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 
 	pb "github.com/ibiscum/Go-for-DevOps/chapter11/ops/proto"
 	mpb "github.com/ibiscum/Go-for-DevOps/chapter11/ops/proto/jaeger/model"
@@ -20,7 +21,7 @@ type Ops struct {
 
 // New is the constructor for Client. addr is the server's [host]:[port].
 func New(addr string) (*Ops, error) {
-	conn, err := grpc.Dial(addr, grpc.WithInsecure())
+	conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
 	}

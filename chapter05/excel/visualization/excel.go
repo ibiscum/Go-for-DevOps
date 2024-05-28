@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"log"
 	"reflect"
 	"strconv"
 	"sync"
@@ -29,14 +30,21 @@ var validCPUVendors = map[CPUVendor]bool{
 func main() {
 	sheet, err := newServerSheet()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
-	sheet.add("svlaa01", 12, mustParse("10/27/2021"), Intel)
-	sheet.add("svlac14", 13, mustParse("12/13/2021"), AMD)
+	err = sheet.add("svlaa01", 12, mustParse("10/27/2021"), Intel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = sheet.add("svlac14", 13, mustParse("12/13/2021"), AMD)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	if err := sheet.render(); err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
 
@@ -64,10 +72,25 @@ func newServerSheet() (*serverSheet, error) {
 		nextRow:   2,
 	}
 
-	s.xlsx.SetCellValue(s.sheetName, "A1", "Server Name")
-	s.xlsx.SetCellValue(s.sheetName, "B1", "Generation")
-	s.xlsx.SetCellValue(s.sheetName, "C1", "Acquisition Date")
-	s.xlsx.SetCellValue(s.sheetName, "D1", "CPU Vendor")
+	err := s.xlsx.SetCellValue(s.sheetName, "A1", "Server Name")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = s.xlsx.SetCellValue(s.sheetName, "B1", "Generation")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = s.xlsx.SetCellValue(s.sheetName, "C1", "Acquisition Date")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = s.xlsx.SetCellValue(s.sheetName, "D1", "CPU Vendor")
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	return s, nil
 }
@@ -89,11 +112,28 @@ func (s *serverSheet) add(name string, gen int, acquisition time.Time, vendor CP
 		return fmt.Errorf("vendor %v is not a valid vendor", vendor)
 	}
 
-	s.xlsx.SetCellValue(s.sheetName, "A"+strconv.Itoa(s.nextRow), name)
-	s.xlsx.SetCellValue(s.sheetName, "B"+strconv.Itoa(s.nextRow), gen)
-	s.xlsx.SetCellValue(s.sheetName, "C"+strconv.Itoa(s.nextRow), acquisition)
-	s.xlsx.SetColWidth(s.sheetName, "C", "C", 20)
-	s.xlsx.SetCellValue(s.sheetName, "D"+strconv.Itoa(s.nextRow), vendor)
+	err := s.xlsx.SetCellValue(s.sheetName, "A"+strconv.Itoa(s.nextRow), name)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = s.xlsx.SetCellValue(s.sheetName, "B"+strconv.Itoa(s.nextRow), gen)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = s.xlsx.SetCellValue(s.sheetName, "C"+strconv.Itoa(s.nextRow), acquisition)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = s.xlsx.SetColWidth(s.sheetName, "C", "C", 20)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = s.xlsx.SetCellValue(s.sheetName, "D"+strconv.Itoa(s.nextRow), vendor)
+	if err != nil {
+		log.Fatal(err)
+	}
 	switch vendor {
 	case Intel:
 		s.summaries.cpuVendor.intel++
@@ -118,14 +158,30 @@ func (s *serverSheet) render() error {
 }
 
 func (s *serverSheet) writeSummaries() {
-	s.xlsx.SetCellValue(s.sheetName, "F1", "Vendor Summary")
-	s.xlsx.SetCellValue(s.sheetName, "F2", "Vendor")
-	s.xlsx.SetCellValue(s.sheetName, "G2", "Total")
+	if err := s.xlsx.SetCellValue(s.sheetName, "F1", "Vendor Summary"); err != nil {
+		log.Fatal(err)
+	}
 
-	s.xlsx.SetCellValue(s.sheetName, "F3", Intel)
-	s.xlsx.SetCellValue(s.sheetName, "G3", s.summaries.cpuVendor.intel)
-	s.xlsx.SetCellValue(s.sheetName, "F4", AMD)
-	s.xlsx.SetCellValue(s.sheetName, "G4", s.summaries.cpuVendor.amd)
+	if err := s.xlsx.SetCellValue(s.sheetName, "F2", "Vendor"); err != nil {
+		log.Fatal(err)
+	}
+
+	if err := s.xlsx.SetCellValue(s.sheetName, "G2", "Total"); err != nil {
+		log.Fatal(err)
+	}
+
+	if err := s.xlsx.SetCellValue(s.sheetName, "F3", Intel); err != nil {
+		log.Fatal(err)
+	}
+	if err := s.xlsx.SetCellValue(s.sheetName, "G3", s.summaries.cpuVendor.intel); err != nil {
+		log.Fatal(err)
+	}
+	if err := s.xlsx.SetCellValue(s.sheetName, "F4", AMD); err != nil {
+		log.Fatal(err)
+	}
+	if err := s.xlsx.SetCellValue(s.sheetName, "G4", s.summaries.cpuVendor.amd); err != nil {
+		log.Fatal(err)
+	}
 }
 
 func (s *serverSheet) createCPUChart() error {

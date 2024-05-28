@@ -11,6 +11,7 @@ import (
 
 	otelTrace "go.opentelemetry.io/otel/trace"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	duration "google.golang.org/protobuf/types/known/durationpb"
 	timestamp "google.golang.org/protobuf/types/known/timestamppb"
 
@@ -74,7 +75,7 @@ type Jaeger struct {
 
 // New creates a new Jaeger client that connects to addr.
 func New(addr string) (*Jaeger, error) {
-	conn, err := grpc.Dial(addr, grpc.WithInsecure())
+	conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
 	}

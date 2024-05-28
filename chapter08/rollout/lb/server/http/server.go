@@ -191,6 +191,7 @@ func StatusCheck(urlPath string, healthyValues []string) (HealthCheck, error) {
 	}
 
 	return func(ctx context.Context, endpoint string) error {
+
 		u, err := url.Parse(endpoint)
 		if err != nil {
 			return err
@@ -198,7 +199,8 @@ func StatusCheck(urlPath string, healthyValues []string) (HealthCheck, error) {
 		u.Scheme = "http"
 		u.Path = urlPath
 
-		ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+		// ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+		ctx, cancel := context.WithTimeout(ctx, 1*time.Second)
 		defer cancel()
 
 		c := &http.Client{}
