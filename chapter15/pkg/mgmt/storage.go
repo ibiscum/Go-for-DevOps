@@ -94,10 +94,10 @@ func (sf *StorageFactory) getPrimaryAccountKey(ctx context.Context, stack *Stora
 	return res.Keys[0]
 }
 
-func (ss *StorageStack) ServiceClient() *azblob.ServiceClient {
+func (ss *StorageStack) ServiceClient() *azblob.Client {
 	cred := helpers.HandleErrWithResult(azblob.NewSharedKeyCredential(*ss.Account.Name, *ss.AccountKey.Value))
 	blobURI := *ss.Account.Properties.PrimaryEndpoints.Blob
-	client, err := azblob.NewServiceClientWithSharedKey(blobURI, cred, nil)
+	client, err := azblob.NewClientWithSharedKeyCredential(blobURI, cred, nil)
 	helpers.HandleErr(err)
 	return client
 }
