@@ -2,14 +2,14 @@ go 1.22.1
 
 use (
 	./chapter05/excel/simple
-    ./chapter05/excel/visualization
+	./chapter05/excel/visualization
 	./chapter06/grpc
 	./chapter07
 	./chapter08
 	./chapter09/alerting/client
-    ./chapter09/alerting/server
-    ./chapter09/metrics/client
-    ./chapter09/metrics/server
+	./chapter09/alerting/server
+	./chapter09/metrics/client
+	./chapter09/metrics/server
 	./chapter10
 	./chapter11
 	./chapter11/ops/proto

@@ -114,14 +114,23 @@ func newTraceExporter(ctx context.Context, e Exporter) (*sdktrace.TracerProvider
 	switch v := e.(type) {
 	case OTELGRPC:
 		exp, err = otelGRPC(ctx, v)
+		if err != nil {
+			return nil, err
+		}
 	case Stderr:
 		exp, err = newFileExporter(os.Stderr)
+		if err != nil {
+			return nil, err
+		}
 	case File:
 		f, err := os.Create(v.Path)
 		if err != nil {
 			return nil, err
 		}
 		exp, err = newFileExporter(f)
+		if err != nil {
+			return nil, err
+		}
 	default:
 		return nil, fmt.Errorf("%T is not a valid Exporter", e)
 	}

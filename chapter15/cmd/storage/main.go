@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"context"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"time"
@@ -12,18 +11,19 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob"
 	"github.com/joho/godotenv"
 
-	. "github.com/ibiscum/Go-for-DevOps/chapter15/pkg/helpers"
+	"github.com/ibiscum/Go-for-DevOps/chapter15/pkg/helpers"
 	"github.com/ibiscum/Go-for-DevOps/chapter15/pkg/mgmt"
 )
 
 func init() {
-	_ = godotenv.Load()
+	err := godotenv.Load()
+	helpers.HandleErr(err)
 }
 
 func main() {
-	subscriptionID := MustGetenv("AZURE_SUBSCRIPTION_ID")
+	subscriptionID := helpers.MustGetenv("AZURE_SUBSCRIPTION_ID")
 	factory := mgmt.NewStorageFactory(subscriptionID)
-	fmt.Println("Staring to build Azure resources...")
+	fmt.Println("Starting to build Azure resources...")
 	stack := factory.CreateStorageStack(context.Background(), "southcentralus")
 
 	uploadBlobs(stack)
@@ -38,37 +38,37 @@ func main() {
 func uploadBlobs(stack *mgmt.StorageStack) {
 	serviceClient := stack.ServiceClient()
 	containerClient, err := serviceClient.NewContainerClient("jd-imgs")
-	HandleErr(err)
+	helpers.HandleErr(err)
 
 	fmt.Printf("Creating a new container \"jd-imgs\" in the Storage Account...\n")
 	_, err = containerClient.Create(context.Background(), nil)
-	HandleErr(err)
+	helpers.HandleErr(err)
 
 	fmt.Printf("Reading all files ./blobs...\n")
-	files, err := ioutil.ReadDir("./blobs")
-	HandleErr(err)
+	files, err := os.ReadDir("./blobs")
+	helpers.HandleErr(err)
 	for _, file := range files {
 		fmt.Printf("Uploading file %q to container jd-imgs...\n", file.Name())
-		blobClient := HandleErrWithResult(containerClient.NewBlockBlobClient(file.Name()))
-		osFile := HandleErrWithResult(os.Open(path.Join("./blobs", file.Name())))
-		_ = HandleErrWithResult(blobClient.UploadFile(context.Background(), osFile, azblob.UploadOption{}))
+		blobClient := helpers.HandleErrWithResult(containerClient.NewBlockBlobClient(file.Name()), nil)
+		osFile := helpers.HandleErrWithResult(os.Open(path.Join("./blobs", file.Name())))
+		_ = helpers.HandleErrWithResult(blobClient.UploadFile(context.Background(), osFile, azblob.UploadOption{}))
 	}
 }
 
 func printSASUris(stack *mgmt.StorageStack) {
 	serviceClient := stack.ServiceClient()
 	containerClient, err := serviceClient.NewContainerClient("jd-imgs")
-	HandleErr(err)
+	helpers.HandleErr(err)
 
 	fmt.Printf("\nGenerating readonly links to blobs that expire in 2 hours...\n")
-	files := HandleErrWithResult(ioutil.ReadDir("./blobs"))
+	files := helpers.HandleErrWithResult(os.ReadDir("./blobs"))
 	for _, file := range files {
-		blobClient := HandleErrWithResult(containerClient.NewBlockBlobClient(file.Name()))
+		blobClient := helpers.HandleErrWithResult(containerClient.NewBlockBlobClient(file.Name()), nil)
 		permissions := azblob.BlobSASPermissions{
 			Read: true,
 		}
 		now := time.Now().UTC()
-		sasQuery := HandleErrWithResult(blobClient.GetSASToken(permissions, now, now.Add(2*time.Hour)))
+		sasQuery := helpers.HandleErrWithResult(blobClient.GetSASToken(permissions, now, now.Add(2*time.Hour)), nil)
 		fmt.Println(blobClient.URL() + "?" + sasQuery.Encode())
 	}
 }

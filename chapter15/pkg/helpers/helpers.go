@@ -4,17 +4,16 @@ import (
 	"context"
 	"log"
 	"os"
-	"time"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/arm"
-	armruntime "github.com/Azure/azure-sdk-for-go/sdk/azcore/arm/runtime"
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
 	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
 
-const (
-	DefaultPollingFreq = 10 * time.Second
-)
+// const (
+// 	DefaultPollingFreq = 10 * time.Second
+// )
 
 type ClientBuilderFunc[T any] func(string, azcore.TokenCredential, *arm.ClientOptions) (*T, error)
 
@@ -30,8 +29,8 @@ func BuildClient[T any](subID string, cred *azidentity.DefaultAzureCredential, b
 	return HandleErrWithResult(builderFunc(subID, cred, nil))
 }
 
-func HandleErrPoller[T any](ctx context.Context, poller *armruntime.Poller[T]) T {
-	res, err := poller.PollUntilDone(ctx, DefaultPollingFreq)
+func HandleErrPoller[T any](ctx context.Context, poller *runtime.Poller[T]) T {
+	res, err := poller.PollUntilDone(ctx, nil)
 	HandleErr(err)
 	return res
 }

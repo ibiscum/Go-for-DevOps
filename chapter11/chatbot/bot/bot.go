@@ -61,7 +61,10 @@ func New(api *slack.Client, client *socketmode.Client) (*Bot, error) {
 func (b *Bot) Start() {
 	go b.loop()
 
-	b.client.RunContext(b.ctx)
+	err := b.client.RunContext(b.ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // Stop stops the bot. The bot cannot be reused after this.

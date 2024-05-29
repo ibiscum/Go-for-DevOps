@@ -41,8 +41,12 @@ func main() {
 	}
 	serv, err := server.New(*addr, clients)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	log.Println("serving starting on: ", *addr)
-	serv.Start()
+	err = serv.Start()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }

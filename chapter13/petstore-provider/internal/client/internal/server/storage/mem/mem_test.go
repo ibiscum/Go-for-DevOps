@@ -2,6 +2,7 @@ package mem
 
 import (
 	"context"
+	"log"
 	"sort"
 	"strconv"
 	"testing"
@@ -66,7 +67,10 @@ func makePets() *Data {
 		n = append(n, proto.Clone(p).(*pb.Pet))
 	}
 
-	d.AddPets(context.Background(), n)
+	err := d.AddPets(context.Background(), n)
+	if err != nil {
+		log.Fatal(err)
+	}
 	return d
 }
 

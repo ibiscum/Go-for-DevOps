@@ -109,7 +109,10 @@ func (h *HTTP) Call(ctx context.Context) (traceID string, err error) {
 	defer span.End()
 
 	ctx = h.makeNestedSpans(ctx, tracer)
-	h.makeRequest(ctx)
+	err = h.makeRequest(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	log.Println("trace says: ", span.SpanContext().TraceID().String())
 	log.Println("convert says: ", convertTraceID(span.SpanContext().TraceID().String()))

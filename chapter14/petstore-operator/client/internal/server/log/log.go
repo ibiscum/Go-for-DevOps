@@ -4,6 +4,7 @@ logs to OTEL spans contained in Context objects. These are seen as
 events with the attribute "log" set to true.
 
 The preferred way to log is to use an event:
+
 	func someFunc(ctx context.Context) {
 		e := NewEvent("someFunc()")
 		defer e.Done(ctx)
@@ -16,6 +17,7 @@ The preferred way to log is to use an event:
 This records an event in the current span that has a key of "latency.ns" with the value in nano-seconds the operation took.
 
 You can use this to log in a similar manner to the logging package with Println and Printf.  This is generally only useful for some generic debugging where you want to log something and filter the trace by messages with key "log". Generally these are messages you don't want to keep.
+
 	func main() {
 		ctx := context.Background()
 
@@ -30,6 +32,7 @@ The above won't log anything, as there is no Span on the Context. If there
 was it would get output to the Open Telementry provider.
 
 If you need to use the standard library log, you can use Logger:
+
 	log.Logger.Println("hello world")
 
 This would print whever the stanard logger prints to. This defaults
@@ -179,7 +182,10 @@ func Println(ctx context.Context, v ...interface{}) {
 	if !span.IsRecording() {
 		return
 	}
-	std.output(span, 2, fmt.Sprintln(v...))
+	err := std.output(span, 2, fmt.Sprintln(v...))
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // Printf acts like log.Printf() except we log to the OTEL span in the Context.
@@ -188,7 +194,10 @@ func Printf(ctx context.Context, format string, v ...interface{}) {
 	if !span.IsRecording() {
 		return
 	}
-	std.output(span, 2, fmt.Sprintf(format, v...))
+	err := std.output(span, 2, fmt.Sprintf(format, v...))
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // SetFlags sets the output flags for the standard logger.
@@ -249,8 +258,8 @@ func (l *logger) output(span trace.Span, calldepth int, s string) error {
 }
 
 // formatHeader writes log header to buf in following order:
-//   * date and/or time (if corresponding flags are provided),
-//   * file and line number (if corresponding flags are provided),
+//   - date and/or time (if corresponding flags are provided),
+//   - file and line number (if corresponding flags are provided),
 func (l *logger) formatHeader(buf *[]byte, t time.Time, file string, line int) {
 	if l.flag&(Ldate|Ltime|Lmicroseconds) != 0 {
 		if l.flag&LUTC != 0 {

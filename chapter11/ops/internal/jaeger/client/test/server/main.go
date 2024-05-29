@@ -87,7 +87,10 @@ func main() {
 		ctx := req.Context()
 		span := trace.SpanFromContext(ctx)
 		span.SetAttributes(serverAttribute)
-		w.Write([]byte("Hello World"))
+		_, err := w.Write([]byte("Hello World"))
+		if err != nil {
+			log.Fatal(err)
+		}
 		log.Println("got called")
 	})
 	wrappedHandler := otelhttp.NewHandler(handler, "/hello")
@@ -95,5 +98,8 @@ func main() {
 	// serve up the wrapped handler
 	http.Handle("/hello", wrappedHandler)
 	log.Println("server started")
-	http.ListenAndServe(":7080", nil)
+	err := http.ListenAndServe(":7080", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

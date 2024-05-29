@@ -11,8 +11,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resources/armresources"
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/storage/armstorage"
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob"
-
-	hp "github.com/ibiscum/Go-for-DevOps/chapter15/pkg/helpers"
+	"github.com/ibiscum/Go-for-DevOps/chapter15/pkg/helpers"
 )
 
 type StorageStack struct {
@@ -33,12 +32,12 @@ type StorageFactory struct {
 
 // NewStorageFactory instantiates an Azure Storage factory for building an Azure Storage playground
 func NewStorageFactory(subscriptionID string) *StorageFactory {
-	cred := hp.HandleErrWithResult(azidentity.NewDefaultAzureCredential(nil))
+	cred := helpers.HandleErrWithResult(azidentity.NewDefaultAzureCredential(nil))
 	return &StorageFactory{
 		cred:           cred,
 		subscriptionID: subscriptionID,
-		groupsClient:   hp.BuildClient(subscriptionID, cred, armresources.NewResourceGroupsClient),
-		storageClient:  hp.BuildClient(subscriptionID, cred, armstorage.NewAccountsClient),
+		groupsClient:   helpers.BuildClient(subscriptionID, cred, armresources.NewResourceGroupsClient),
+		storageClient:  helpers.BuildClient(subscriptionID, cred, armstorage.NewAccountsClient),
 	}
 }
 
@@ -54,7 +53,7 @@ func (sf *StorageFactory) CreateStorageStack(ctx context.Context, location strin
 
 func (sf *StorageFactory) DestroyStorageStack(ctx context.Context, stack *StorageStack) {
 	_, err := sf.groupsClient.BeginDelete(ctx, stack.name, nil)
-	hp.HandleErr(err)
+	helpers.HandleErr(err)
 }
 
 // createResourceGroup creates an Azure resource by name and in a given location
@@ -63,9 +62,9 @@ func (sf *StorageFactory) createResourceGroup(ctx context.Context, name, locatio
 		Location: to.Ptr(location),
 	}
 
-	fmt.Printf("Building an Azure Resource Group named %q...\n", name)
+	fmt.Printf("Building an Azure Resource Group named %q\n", name)
 	res, err := sf.groupsClient.CreateOrUpdate(ctx, name, param, nil)
-	hp.HandleErr(err)
+	helpers.HandleErr(err)
 	return res.ResourceGroup
 }
 
@@ -81,24 +80,24 @@ func (sf *StorageFactory) createStorageAccount(ctx context.Context, name, locati
 	}
 
 	accountName := strings.Replace(name, "-", "", -1)
-	fmt.Printf("Building an Azure Storage Account named %q...\n", accountName)
+	fmt.Printf("Building an Azure Storage Account named %q\n", accountName)
 	poller, err := sf.storageClient.BeginCreate(ctx, name, accountName, param, nil)
-	hp.HandleErr(err)
-	res := hp.HandleErrPoller(ctx, poller)
+	helpers.HandleErr(err)
+	res := helpers.HandleErrPoller(ctx, poller)
 	return res.Account
 }
 
 func (sf *StorageFactory) getPrimaryAccountKey(ctx context.Context, stack *StorageStack) *armstorage.AccountKey {
 	fmt.Printf("Fetching the Azure Storage Account shared key...\n")
 	res, err := sf.storageClient.ListKeys(ctx, stack.name, *stack.Account.Name, nil)
-	HandleErr(err)
+	helpers.HandleErr(err)
 	return res.Keys[0]
 }
 
 func (ss *StorageStack) ServiceClient() *azblob.ServiceClient {
-	cred := hp.HandleErrWithResult(azblob.NewSharedKeyCredential(*ss.Account.Name, *ss.AccountKey.Value))
+	cred := helpers.HandleErrWithResult(azblob.NewSharedKeyCredential(*ss.Account.Name, *ss.AccountKey.Value))
 	blobURI := *ss.Account.Properties.PrimaryEndpoints.Blob
 	client, err := azblob.NewServiceClientWithSharedKey(blobURI, cred, nil)
-	hp.HandleErr(err)
+	helpers.HandleErr(err)
 	return client
 }

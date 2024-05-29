@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"time"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
@@ -14,10 +14,9 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute"
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/network/armnetwork"
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resources/armresources"
+	"github.com/ibiscum/Go-for-DevOps/chapter15/pkg/helpers"
 	"github.com/mitchellh/go-homedir"
 	"github.com/yelinaung/go-haikunator"
-
-	. "github.com/ibiscum/Go-for-DevOps/chapter15/pkg/helpers"
 )
 
 var (
@@ -39,18 +38,18 @@ type VirtualMachineFactory struct {
 
 // NewVirtualMachineFactory instantiates an Azure VirtualMachine factory
 func NewVirtualMachineFactory(subscriptionID, sshPubKeyPath string) *VirtualMachineFactory {
-	cred := HandleErrWithResult(azidentity.NewDefaultAzureCredential(nil))
+	cred := helpers.HandleErrWithResult(azidentity.NewDefaultAzureCredential(nil))
 	return &VirtualMachineFactory{
 		cred:           cred,
 		subscriptionID: subscriptionID,
 		sshPubKeyPath:  sshPubKeyPath,
-		groupsClient:   BuildClient(subscriptionID, cred, armresources.NewResourceGroupsClient),
-		vmClient:       BuildClient(subscriptionID, cred, armcompute.NewVirtualMachinesClient),
-		vnetClient:     BuildClient(subscriptionID, cred, armnetwork.NewVirtualNetworksClient),
-		subnetClient:   BuildClient(subscriptionID, cred, armnetwork.NewSubnetsClient),
-		nsgClient:      BuildClient(subscriptionID, cred, armnetwork.NewSecurityGroupsClient),
-		nicClient:      BuildClient(subscriptionID, cred, armnetwork.NewInterfacesClient),
-		pipClient:      BuildClient(subscriptionID, cred, armnetwork.NewPublicIPAddressesClient),
+		groupsClient:   helpers.BuildClient(subscriptionID, cred, armresources.NewResourceGroupsClient),
+		vmClient:       helpers.BuildClient(subscriptionID, cred, armcompute.NewVirtualMachinesClient),
+		vnetClient:     helpers.BuildClient(subscriptionID, cred, armnetwork.NewVirtualNetworksClient),
+		subnetClient:   helpers.BuildClient(subscriptionID, cred, armnetwork.NewSubnetsClient),
+		nsgClient:      helpers.BuildClient(subscriptionID, cred, armnetwork.NewSecurityGroupsClient),
+		nicClient:      helpers.BuildClient(subscriptionID, cred, armnetwork.NewInterfacesClient),
+		pipClient:      helpers.BuildClient(subscriptionID, cred, armnetwork.NewPublicIPAddressesClient),
 	}
 }
 
@@ -71,7 +70,7 @@ func (vmf *VirtualMachineFactory) CreateVirtualMachineStack(ctx context.Context,
 	stack := &VirtualMachineStack{
 		Location:   location,
 		name:       haiku.Haikunate(),
-		sshKeyPath: HandleErrWithResult(homedir.Expand(vmf.sshPubKeyPath)),
+		sshKeyPath: helpers.HandleErrWithResult(homedir.Expand(vmf.sshPubKeyPath)),
 	}
 
 	stack.ResourceGroup = vmf.createResourceGroup(ctx, stack.name, stack.Location)
@@ -87,7 +86,7 @@ func (vmf *VirtualMachineFactory) CreateVirtualMachineStack(ctx context.Context,
 // This function does not wait for completion. Once the delete operation is accepted, the function returns.
 func (vmf *VirtualMachineFactory) DestroyVirtualMachineStack(ctx context.Context, vmStack *VirtualMachineStack) {
 	_, err := vmf.groupsClient.BeginDelete(ctx, vmStack.name, nil)
-	HandleErr(err)
+	helpers.HandleErr(err)
 }
 
 // createResourceGroup creates an Azure resource by name and in a given location
@@ -98,7 +97,7 @@ func (vmf *VirtualMachineFactory) createResourceGroup(ctx context.Context, name,
 
 	fmt.Printf("Building an Azure Resource Group named %q...\n", name)
 	res, err := vmf.groupsClient.CreateOrUpdate(ctx, name, param, nil)
-	HandleErr(err)
+	helpers.HandleErr(err)
 	return res.ResourceGroup
 }
 
@@ -125,8 +124,8 @@ func (vmf *VirtualMachineFactory) createVirtualNetwork(ctx context.Context, vmSt
 
 	fmt.Printf("Building an Azure Virtual Network named %q...\n", *param.Name)
 	poller, err := vmf.vnetClient.BeginCreateOrUpdate(ctx, vmStack.name, *param.Name, param, nil)
-	HandleErr(err)
-	res := HandleErrPoller(ctx, poller)
+	helpers.HandleErr(err)
+	res := helpers.HandleErrPoller(ctx, poller)
 	return res.VirtualNetwork
 }
 
@@ -157,8 +156,8 @@ func (vmf *VirtualMachineFactory) createSecurityGroup(ctx context.Context, name,
 
 	fmt.Printf("Building an Azure Network Security Group named %q...\n", *param.Name)
 	poller, err := vmf.nsgClient.BeginCreateOrUpdate(ctx, name, *param.Name, param, nil)
-	HandleErr(err)
-	res := HandleErrPoller(ctx, poller)
+	helpers.HandleErr(err)
+	res := helpers.HandleErrPoller(ctx, poller)
 	return res.SecurityGroup
 }
 
@@ -168,17 +167,17 @@ func (vmf *VirtualMachineFactory) createVirtualMachine(ctx context.Context, vmSt
 
 	fmt.Printf("Building an Azure Virtual Machine named %q...\n", *param.Name)
 	poller, err := vmf.vmClient.BeginCreateOrUpdate(ctx, vmStack.name, *param.Name, param, nil)
-	HandleErr(err)
-	res := HandleErrPoller(ctx, poller)
+	helpers.HandleErr(err)
+	res := helpers.HandleErrPoller(ctx, poller)
 	return res.VirtualMachine
 }
 
 // getFirstNetworkInterface returns the first network interface on the vmStack Virtual Machine
 func (vmf *VirtualMachineFactory) getFirstNetworkInterface(ctx context.Context, vmStack *VirtualMachineStack) armnetwork.Interface {
 	iface := vmStack.VirtualMachine.Properties.NetworkProfile.NetworkInterfaces[0]
-	parsed := HandleErrWithResult(arm.ParseResourceID(*iface.ID))
+	parsed := helpers.HandleErrWithResult(arm.ParseResourceID(*iface.ID))
 	fmt.Printf("Fetching the first Network Interface named %q connected to the VM...\n", parsed.Name)
-	res := HandleErrWithResult(vmf.nicClient.Get(ctx, vmStack.name, parsed.Name, nil))
+	res := helpers.HandleErrWithResult(vmf.nicClient.Get(ctx, vmStack.name, parsed.Name, nil))
 	return res.Interface
 }
 
@@ -186,7 +185,7 @@ func (vmf *VirtualMachineFactory) getFirstNetworkInterface(ctx context.Context, 
 func (vmf *VirtualMachineFactory) getPublicIPAddress(ctx context.Context, vmStack *VirtualMachineStack) armnetwork.PublicIPAddress {
 	pipName := vmStack.NetworkInterface.Properties.IPConfigurations[0].Properties.PublicIPAddress.Name
 	fmt.Printf("Fetching the Public IP Address named %q connected to the VM...\n", *pipName)
-	res := HandleErrWithResult(vmf.pipClient.Get(ctx, vmStack.name, *pipName, nil))
+	res := helpers.HandleErrWithResult(vmf.pipClient.Get(ctx, vmStack.name, *pipName, nil))
 	return res.PublicIPAddress
 }
 
@@ -249,8 +248,8 @@ func networkProfile(vmStack *VirtualMachineStack) *armcompute.NetworkProfile {
 
 // linuxOSProfile creates an Azure VM OS profile with only SSH access for the devops admin user
 func linuxOSProfile(vmStack *VirtualMachineStack) *armcompute.OSProfile {
-	sshKeyData := HandleErrWithResult(ioutil.ReadFile(vmStack.sshKeyPath))
-	cloudInitContent := HandleErrWithResult(ioutil.ReadFile("./cloud-init/init.yml"))
+	sshKeyData := helpers.HandleErrWithResult(os.ReadFile(vmStack.sshKeyPath))
+	cloudInitContent := helpers.HandleErrWithResult(os.ReadFile("./cloud-init/init.yml"))
 	b64EncodedInitScript := base64.StdEncoding.EncodeToString(cloudInitContent)
 	return &armcompute.OSProfile{
 		AdminUsername: to.Ptr("devops"),

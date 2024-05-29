@@ -59,7 +59,7 @@ func dataSourcePetRead(ctx context.Context, data *schema.ResourceData, meta inte
 }
 
 func flattenPets(pets []*client.Pet) []interface{} {
-	ifacePets := make([]interface{}, len(pets), len(pets))
+	ifacePets := make([]interface{}, len(pets))
 	for i, pet := range pets {
 		ifacePets[i] = petToMap(pet)
 	}

@@ -61,7 +61,10 @@ var listTracesRE = regexp.MustCompile(`(\S+)=(?:(\S+))`)
 func (o Ops) ListTraces(ctx context.Context, m bot.Message) {
 	sp := strings.Split(m.Text, "list traces")
 	if len(sp) != 2 {
-		o.write(m, "The 'list traces' command is malformed")
+		err := o.write(m, "The 'list traces' command is malformed")
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 	t := strings.TrimSpace(sp[1])
@@ -79,7 +82,10 @@ func (o Ops) ListTraces(ctx context.Context, m bot.Message) {
 		case "start":
 			t, err := time.Parse(`01/02/2006-15:04:05`, opt.val)
 			if err != nil {
-				o.write(m, "The start option must be in the form `01/02/2006-15:04:05` for UTC")
+				err := o.write(m, "The start option must be in the form `01/02/2006-15:04:05` for UTC")
+				if err != nil {
+					log.Fatal(err)
+				}
 				return
 			}
 			options = append(options, client.WithStart(t))
@@ -89,36 +95,54 @@ func (o Ops) ListTraces(ctx context.Context, m bot.Message) {
 			}
 			t, err := time.Parse(`01/02/2006-15:04:05`, opt.val)
 			if err != nil {
-				o.write(m, "The end option must be in the form `01/02/2006-15:04:05` for UTC")
+				err := o.write(m, "The end option must be in the form `01/02/2006-15:04:05` for UTC")
+				if err != nil {
+					log.Fatal(err)
+				}
 				return
 			}
 			options = append(options, client.WithEnd(t))
 		case "limit":
 			i, err := strconv.Atoi(opt.val)
 			if err != nil {
-				o.write(m, "The limit option must be an integer")
+				err = o.write(m, "The limit option must be an integer")
+				if err != nil {
+					log.Fatal(err)
+				}
 				return
 			}
 			if i > 100 {
-				o.write(m, "Cannot request more than 100 traces")
+				err = o.write(m, "Cannot request more than 100 traces")
+				if err != nil {
+					log.Fatal(err)
+				}
 				return
 			}
 			options = append(options, client.WithLimit(int32(i)))
 		case "tags":
 			tags, err := convertList(opt.val)
 			if err != nil {
-				o.write(m, "tags: must enclosed in [], like tags=[tag,tag2]")
+				err := o.write(m, "tags: must enclosed in [], like tags=[tag,tag2]")
+				if err != nil {
+					log.Fatal(err)
+				}
 				return
 			}
 			options = append(options, client.WithLabels(tags))
 		default:
-			o.write(m, "don't understand an option type(%s)", opt.key)
+			err := o.write(m, "don't understand an option type(%s)", opt.key)
+			if err != nil {
+				log.Fatal(err)
+			}
 			return
 		}
 	}
 	traces, err := o.OpsClient.ListTraces(ctx, options...)
 	if err != nil {
-		o.write(m, "Ops server had an error: %s", err)
+		err = o.write(m, "Ops server had an error: %s", err)
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 	b := strings.Builder{}
@@ -135,21 +159,30 @@ func (o Ops) ListTraces(ctx context.Context, m bot.Message) {
 		)
 	}
 	table.Render()
-	o.write(m, b.String())
+	err = o.write(m, b.String())
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // ShowTrace gives the URL to a trace ID.
 func (o Ops) ShowTrace(ctx context.Context, m bot.Message) {
 	sp := strings.Split(m.Text, "show trace")
 	if len(sp) != 2 {
-		o.write(m, `show trace command should be in form: show trace <id>`)
+		err := o.write(m, `show trace command should be in form: show trace <id>`)
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 	id := strings.TrimSpace(sp[1])
 
 	trace, err := o.OpsClient.ShowTrace(ctx, id)
 	if err != nil {
-		o.write(m, "Ops server had an error: %s", err)
+		err := o.write(m, "Ops server had an error: %s", err)
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 
@@ -185,21 +218,30 @@ func (o Ops) ShowTrace(ctx context.Context, m bot.Message) {
 	table.Render()
 	b.WriteString("\n")
 
-	o.write(m, "%s,\nHere is the trace info you requested:\n\n%s", m.User.Name, b.String())
+	err = o.write(m, "%s,\nHere is the trace info you requested:\n\n%s", m.User.Name, b.String())
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // ShowLogs outputs the logs given a trace ID.
 func (o Ops) ShowLogs(ctx context.Context, m bot.Message) {
 	sp := strings.Split(m.Text, "show logs")
 	if len(sp) != 2 {
-		o.write(m, `show logs command should be in form: show logs <id>`)
+		err := o.write(m, `show logs command should be in form: show logs <id>`)
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 	id := strings.TrimSpace(sp[1])
 	log.Println("show logs id==", id)
 	logs, err := o.OpsClient.ShowLogs(ctx, id)
 	if err != nil {
-		o.write(m, "Ops server had an error: %s", err)
+		err := o.write(m, "Ops server had an error: %s", err)
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 
@@ -216,7 +258,10 @@ func (o Ops) ShowLogs(ctx context.Context, m bot.Message) {
 		b.WriteString(fmt.Sprintf("%s: %s: %s\n", t, l.Key, l.Value))
 	}
 
-	o.write(m, "%s,\nHere are the logs you requested for trace %s:\n\n%s", m.User.Name, id, b.String())
+	err = o.write(m, "%s,\nHere are the logs you requested for trace %s:\n\n%s", m.User.Name, id, b.String())
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 var sampleTypeRE = regexp.MustCompile(`^\s*(never|always|float)`)
@@ -225,14 +270,20 @@ var sampleTypeRE = regexp.MustCompile(`^\s*(never|always|float)`)
 func (o Ops) ChangeSampling(ctx context.Context, m bot.Message) {
 	sp := strings.Split(m.Text, "change sampling")
 	if len(sp) != 2 {
-		o.write(m, `change sampling command should be in form: change sampling <type> <options>`)
+		err := o.write(m, `change sampling command should be in form: change sampling <type> <options>`)
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 	t := strings.TrimSpace((sp[1]))
 
 	sub := sampleTypeRE.FindStringSubmatch(t)
 	if len(sub) == 0 {
-		o.write(m, `I don't have support for the samplling type you requested, sorry...`)
+		err := o.write(m, `I don't have support for the samplling type you requested, sorry...`)
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 
@@ -248,27 +299,42 @@ func (o Ops) ChangeSampling(ctx context.Context, m bot.Message) {
 
 		sp := strings.Split(t, "float")
 		if len(sp) != 2 {
-			o.write(m, `'change sampling float' must be followed by a float that is > 0 and <= 1`)
+			err := o.write(m, `'change sampling float' must be followed by a float that is > 0 and <= 1`)
+			if err != nil {
+				log.Fatal(err)
+			}
 			return
 		}
 		f, err := strconv.ParseFloat(strings.TrimSpace(sp[1]), 64)
 		if err != nil {
-			o.write(m, `'change sampling float' had an invalid float option: %q`, strings.TrimSpace(sp[1]))
+			err := o.write(m, `'change sampling float' had an invalid float option: %q`, strings.TrimSpace(sp[1]))
+			if err != nil {
+				log.Fatal(err)
+			}
 			return
 		}
 		if f <= 0 || f > 1 {
-			o.write(m, `'change sampling float' must be followed by a float that is > 0 and <= 1`)
+			err := o.write(m, `'change sampling float' must be followed by a float that is > 0 and <= 1`)
+			if err != nil {
+				log.Fatal(err)
+			}
 			return
 		}
 		req.FloatValue = f
 	default:
-		o.write(m, `sorry, I hit a bug, I kinda understand %q, so you need to talk to my creator`, m.Text)
+		err := o.write(m, `sorry, I hit a bug, I kinda understand %q, so you need to talk to my creator`, m.Text)
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 
 	err := o.OpsClient.ChangeSampling(ctx, req)
 	if err != nil {
-		o.write(m, "Ops server gave an error on changing the sampling: %s", err)
+		err := o.write(m, "Ops server gave an error on changing the sampling: %s", err)
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 }
@@ -294,25 +360,40 @@ func init() {
 func (o Ops) Help(ctx context.Context, m bot.Message) {
 	sp := strings.Split(m.Text, "help")
 	if len(sp) < 2 {
-		o.write(m, "%s,\nYou have to give me a command you want help with", m.User.Name)
+		err := o.write(m, "%s,\nYou have to give me a command you want help with", m.User.Name)
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 	cmd := strings.TrimSpace(strings.Join(sp[1:], ""))
 	if cmd == "" {
-		o.write(m, "Here are all the commands that I can help you with:\n%s", cmdList)
+		err := o.write(m, "Here are all the commands that I can help you with:\n%s", cmdList)
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 
 	if v, ok := help[cmd]; ok {
-		o.write(m, "I can help you waith that:\n%s", v)
+		err := o.write(m, "I can help you waith that:\n%s", v)
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 
-	o.write(m, "%s,\nI don't know what %q is to give you help", m.User.Name, cmd)
+	err := o.write(m, "%s,\nI don't know what %q is to give you help", m.User.Name, cmd)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func (o Ops) lastResort(ctx context.Context, m bot.Message) {
-	o.write(m, "%s,\nI don't have anything that handles what you sent", m.User.Name)
+	err := o.write(m, "%s,\nI don't have anything that handles what you sent", m.User.Name)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func convertList(s string) ([]string, error) {
