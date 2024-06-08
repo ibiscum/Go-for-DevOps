@@ -79,5 +79,8 @@ func main() {
 
 	// Tell gRPC to use our listener for new connections.
 	log.Println("Server started on: ", *addr)
-	g.Serve(lis)
+	err = g.Serve(lis)
+	if err != nil {
+		panic(err)
+	}
 }

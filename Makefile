@@ -3,4 +3,4 @@
 all: lint
 
 lint:
-	go list -f '{{.Dir}}/...' -m | xargs golangci-lint run --timeout 5m
+	go list -f '{{.Dir}}/...' -m | xargs golangci-lint run -v --timeout 15m

@@ -23,7 +23,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -61,18 +60,18 @@ type Info struct {
 	Status Status
 }
 
-func (i Info) validate() error {
-	i.Name = strings.TrimSpace(i.Name)
-	if i.Name == "" {
-		return fmt.Errorf("es.json: rule with empty name, ignored")
-	}
-	switch i.Status {
-	case "go", "stop":
-	default:
-		return fmt.Errorf("es.json: rule(%s) has invalid Status(%s), ignored", i.Name, i.Status)
-	}
-	return nil
-}
+// func (i Info) validate() error {
+// 	i.Name = strings.TrimSpace(i.Name)
+// 	if i.Name == "" {
+// 		return fmt.Errorf("es.json: rule with empty name, ignored")
+// 	}
+// 	switch i.Status {
+// 	case "go", "stop":
+// 	default:
+// 		return fmt.Errorf("es.json: rule(%s) has invalid Status(%s), ignored", i.Name, i.Status)
+// 	}
+// 	return nil
+// }
 
 // Reader reads the es.json file at intervals and makes the data and changes to the data
 // available.

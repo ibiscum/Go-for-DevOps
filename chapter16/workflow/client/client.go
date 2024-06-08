@@ -21,6 +21,7 @@ import (
 	"github.com/sony/gobreaker"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/proto"
 
@@ -43,7 +44,7 @@ type Workflow struct {
 
 // New creates a new Workflow instance.
 func New(addr string) (*Workflow, error) {
-	conn, err := grpc.Dial(addr, grpc.WithInsecure())
+	conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
 	}
@@ -60,10 +61,7 @@ func New(addr string) (*Workflow, error) {
 					return c.ConsecutiveFailures > 1
 				},
 				IsSuccessful: func(err error) bool {
-					if isFatal(err) {
-						return true
-					}
-					return false
+					return isFatal(err)
 				},
 			},
 		),

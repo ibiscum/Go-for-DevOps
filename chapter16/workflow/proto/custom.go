@@ -74,5 +74,4 @@ func (x *StatusResp) writeRunning(buff *strings.Builder, block *BlockStatus) {
 		tbl.AddRow(i, job.Desc, job.Status)
 	}
 	tbl.Print()
-	return
 }

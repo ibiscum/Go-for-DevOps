@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/data/packages/sites"
 	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/service/jobs"
 	"github.com/ibiscum/Go-for-DevOps/chapter16/workflow/internal/token"
 
@@ -83,8 +82,8 @@ func (a *args) validate(args map[string]string) error {
 
 // Job implements jobs.Job.
 type Job struct {
-	sites map[string]sites.Site
-	args  args
+	//sites map[string]sites.Site
+	args args
 }
 
 func newJob() *Job {

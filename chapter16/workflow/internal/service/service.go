@@ -162,7 +162,7 @@ func (w *Workflow) Exec(ctx context.Context, req *pb.ExecReq) (*pb.ExecResp, err
 	}
 
 	t := time.Unix(u.Time().UnixTime())
-	if time.Now().Sub(t) > 1*time.Hour {
+	if time.Since(t) > 1*time.Hour {
 		return nil, status.Errorf(codes.FailedPrecondition, "Id(%s) is older than 1 hour and cannot be started", req.Id)
 	}
 

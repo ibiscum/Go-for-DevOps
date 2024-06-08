@@ -144,7 +144,7 @@ func newLookups() *Lookups {
 
 		switch m.mtype {
 		case mtInt64Hist:
-			l.mtInt64Hist[m.name] = metric.Must(Meter).NewInt64Histogram(m.name, metric.WithDescription(m.desc))
+			l.mtInt64Hist[m.name] = metric.c Must(Meter).NewInt64Histogram(m.name, metric.WithDescription(m.desc))
 		case mtInt64UD:
 			l.mtInt64UD[m.name] = metric.Must(Meter).NewInt64UpDownCounter(m.name, metric.WithDescription(m.desc))
 		case mtInt64:

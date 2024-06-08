@@ -192,7 +192,7 @@ func createNginxIngress(ctx context.Context, clientSet *kubernetes.Clientset, ns
 			},
 		},
 	}
-	ingress, err := clientSet.NetworkingV1().Ingresses(ns.Name).Create(ctx, ingress, metav1.CreateOptions{})
+	_, err := clientSet.NetworkingV1().Ingresses(ns.Name).Create(ctx, ingress, metav1.CreateOptions{})
 	panicIfError(err)
 }
 
