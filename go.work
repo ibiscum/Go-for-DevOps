@@ -4,6 +4,7 @@ use (
 	./chapter05/excel/simple
 	./chapter05/excel/visualization
 	./chapter06/grpc
+    ./chapter06/rest
 	./chapter07
 	./chapter08
 	./chapter09/alerting/client
