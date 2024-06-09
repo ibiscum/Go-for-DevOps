@@ -39,7 +39,7 @@ import (
 	"go.opentelemetry.io/otel/trace"
 	"google.golang.org/grpc"
 
-	"github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator/client/internal/server/telemetry/tracing/sampler"
+	"github.com/ibiscum/Go-for-DevOps/chapter14/petstore-operator/client/internal/server/telemetry/tracing/sampler"
 )
 
 // Tracer is the tracer initialized by Start().
@@ -115,14 +115,23 @@ func newTraceExporter(ctx context.Context, e Exporter) (*sdktrace.TracerProvider
 	switch v := e.(type) {
 	case OTELGRPC:
 		exp, err = otelGRPC(ctx, v)
+		if err != nil {
+			return nil, err
+		}
 	case Stderr:
 		exp, err = newFileExporter(os.Stderr)
+		if err != nil {
+			return nil, err
+		}
 	case File:
 		f, err := os.Create(v.Path)
 		if err != nil {
 			return nil, err
 		}
 		exp, err = newFileExporter(f)
+		if err != nil {
+			return nil, err
+		}
 	default:
 		return nil, fmt.Errorf("%T is not a valid Exporter", e)
 	}
@@ -168,7 +177,7 @@ func otelGRPC(ctx context.Context, e OTELGRPC) (sdktrace.SpanExporter, error) { 
 		otlptracegrpc.NewClient(
 			otlptracegrpc.WithInsecure(),
 			otlptracegrpc.WithEndpoint(e.Addr),
-			otlptracegrpc.WithDialOption(grpc.WithBlock()),
+			otlptracegrpc.WithDialOption(grpc.WithDefaultCallOptions()),
 		),
 	)
 	if err != nil {

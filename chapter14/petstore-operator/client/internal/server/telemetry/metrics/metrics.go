@@ -45,6 +45,7 @@ import (
 
 	"github.com/ibiscum/Go-for-DevOps/chapter14/petstore-operator/client/internal/server/log"
 
+	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/metric"
 )
 
@@ -90,7 +91,7 @@ var metrics = []metricDef{
 }
 
 // Meter is the meter for the petstore.
-var Meter = global.Meter("petstore")
+var Meter = otel.Meter("petstore")
 
 // Get is used to lookup metrics by name.
 var Get = newLookups()

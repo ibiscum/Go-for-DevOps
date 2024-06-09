@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	pb "github.com/ibiscum/Go-for-DevOps/chapter06/grpc/proto"
+	pb "github.com/ibiscum/Go-for-DevOps/chapter06/grpc/proto/qotd"
 )
 
 // Client is a client to the Quote of the day server.

@@ -6,11 +6,8 @@ import (
 	"time"
 
 	"go.opentelemetry.io/otel"
-	"go.opentelemetry.io/otel/exporters/otlp/otlpmetric"
 	"go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc"
-	"go.opentelemetry.io/otel/sdk/metric/controller/basic"
-	processor "go.opentelemetry.io/otel/sdk/metric/processor/basic"
-	"go.opentelemetry.io/otel/sdk/metric/selector/simple"
+	sdkmetric "go.opentelemetry.io/otel/sdk/metric"
 )
 
 // Controller represents the controller to send metrics to.
@@ -57,24 +54,26 @@ func newController(ctx context.Context, c Controller) (*basic.Controller, error)
 	return nil, fmt.Errorf("%T is not a valid Controller", c)
 }
 
-func otelGRPC(ctx context.Context, args OTELGRPC) (*basic.Controller, error) {
-	metricClient := otlpmetricgrpc.NewClient(
+func otelGRPC(ctx context.Context, args OTELGRPC) (*sdkmetric.MeterProvider, error) {
+	metricExp, err := otlpmetricgrpc.New(ctx,
 		otlpmetricgrpc.WithInsecure(),
 		otlpmetricgrpc.WithEndpoint(args.Addr),
 	)
-	metricExp, err := otlpmetric.New(ctx, metricClient)
+	// metricExp, err := otlpmetric.New(ctx, metricClient)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to create the collector metric exporter")
 	}
 
-	pusher := basic.New(
-		processor.NewFactory(
-			simple.NewWithHistogramDistribution(),
-			metricExp,
-		),
-		basic.WithExporter(metricExp),
-		basic.WithCollectPeriod(10*time.Second),
+	pusher := sdkmetric.NewMeterProvider(
+		sdkmetric.WithReader(sdkmetric.NewPeriodicReader(metricExp)),
+
+		// processor.NewFactory(
+		// 	simple.NewWithHistogramDistribution(),
+		// 	metricExp,
+		// ),
+		// basic.WithExporter(metricExp),
+		// basic.WithCollectPeriod(10*time.Second),
 	)
-	global.SetMeterProvider(pusher)
-	return pusher, nil
+	otel.SetMeterProvider(pusher)
+	return pusher.Shutdown, nil
 }

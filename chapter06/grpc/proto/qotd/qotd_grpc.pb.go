@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             (unknown)
-// source: qotd.proto
+// source: qotd/qotd.proto
 
 package qotd
 
@@ -105,5 +105,5 @@ var QOTD_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "qotd.proto",
+	Metadata: "qotd/qotd.proto",
 }
