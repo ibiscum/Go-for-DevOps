@@ -111,7 +111,7 @@ func init() {
 	rootCmd.AddCommand(getCmd)
 
 	getCmd.Flags().BoolP("dev", "d", false, "Uses the dev server instead of prod")
-	getCmd.Flags().String("addr", "127.0.0.1:80", "Set the QOTD server to use, defaults to production")
+	getCmd.Flags().String("addr", "127.0.0.1:8001", "Set the QOTD server to use, defaults to production")
 	getCmd.Flags().StringP("author", "a", "", "Specify the specific author to get a quote for")
 	getCmd.Flags().Bool("json", false, "Output is in JSON format")
 }
