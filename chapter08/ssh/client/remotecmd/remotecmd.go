@@ -28,7 +28,7 @@ func main() {
 	}
 	_, _, err := net.SplitHostPort(os.Args[1])
 	if err != nil {
-		os.Args[1] = os.Args[1] + ":22"
+		os.Args[1] = os.Args[1] + ":2233"
 		_, _, err = net.SplitHostPort(os.Args[1])
 		if err != nil {
 			fmt.Println("Error: problem with host passed: ", err)

@@ -33,6 +33,7 @@ func main() {
 		},
 		syscall.SIGINT, syscall.SIGTERM,
 	)
+	
 	sigHandler.register(
 		func() {
 			cleanup(cancel, wg, tmpFiles)
