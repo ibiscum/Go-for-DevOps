@@ -153,7 +153,7 @@ func createNginxService(ctx context.Context, clientSet *kubernetes.Clientset, ns
 			},
 		},
 	}
-	service, err := clientSet.CoreV1().Services(ns.Name).Create(ctx, service, metav1.CreateOptions{})
+	_, err := clientSet.CoreV1().Services(ns.Name).Create(ctx, service, metav1.CreateOptions{})
 	panicIfError(err)
 }
 
