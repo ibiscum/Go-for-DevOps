@@ -3,7 +3,7 @@
 TODO: fill in the walk through
 
 ## Running this example
-- `docker-compose up -d`
+- `docker compose up -d`
 - Once started the client application will periodically send requests to the server. Metrics will be collected for the
   requests and responses, then exported for analysis in prometheus. To view the metrics in Prometheus, open http://localhost:9090/.
 - To see the request rate for the server see: http://localhost:9090/graph?g0.expr=rate(demo_server_request_counts%5B2m%5D)&g0.tab=0&g0.stacked=0&g0.show_exemplars=0&g0.range_input=1h
