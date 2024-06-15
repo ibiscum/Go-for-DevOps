@@ -1,6 +1,7 @@
 # Metrics with OpenTelemetry and Prometheus
 
-TODO: fill in the walk through
+    telemetrygen traces --otlp-insecure --traces 3 2>&1 | grep -E 'start|traces|stop'
+
 
 ## Running this example
 - `docker compose up -d`
@@ -21,8 +22,7 @@ This indicates that you aren't running docker. Make sure you have docker install
 - `docker-compose down`
 
 ## Influences / Credit
-The code in this demo was heavily influenced from the example application in https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/examples/demo
-which carries the following license.
+The code in this demo was heavily influenced from the example application in https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/examples/demo which carries the following license.
 ```
 // Copyright The OpenTelemetry Authors
 //

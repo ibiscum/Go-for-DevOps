@@ -13,7 +13,6 @@ use (
 	./chapter09/metrics/client
 	./chapter09/metrics/server
 	./chapter10
-	./chapter11
 	./chapter11/ops/proto
 	./chapter11/ops/proto/jaeger/model
 	./chapter12

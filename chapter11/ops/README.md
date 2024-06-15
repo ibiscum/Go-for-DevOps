@@ -23,7 +23,7 @@ The file directory layout is as follows (with some highlighted files, but not al
 ├── ops.go
 └── proto
     ├── jaeger
-    │   ├── model
+    │   └── model
     ├── ops.pb.go
     ├── ops.proto
     └── ops_grpc.pb.go

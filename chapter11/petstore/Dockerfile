@@ -1,4 +1,4 @@
-FROM golang:1.17
+FROM golang:alpine
 COPY . /usr/src/server/
 WORKDIR /usr/src/server/
 RUN go install

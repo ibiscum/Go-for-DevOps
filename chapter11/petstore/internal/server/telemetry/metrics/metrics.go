@@ -100,7 +100,7 @@ var Get = newLookups()
 var unusedMetricsTmpl = template.Must(
 	template.New("").Parse(
 		`
-The following metrics appeart to be unused:
+The following metrics appear to be unused:
 {{- range .}}
 	{{.}}
 {{- end }}
