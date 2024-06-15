@@ -12,7 +12,6 @@ To send a tweet, you will need to create or use an existing Twitter account, cre
 Some people may not want to set up a Twitter account. If you would like to use tweeter without sending tweets, use the `--dry-run` argument. This will cause the tool to write the message to STDOUT rather than sending the message to Twitter.
 
 ## Inputs
-
 - `--message` **Required** the tweet message you would like to send
 - `--apiKey` the API key under Consumer Keys in the [Twitter developer portal](https://developer.twitter.com/en/portal/projects-and-apps)
 - `--apiKeySecret` the API key secret under Consumer Keys in the [Twitter developer portal](https://developer.twitter.com/en/portal/projects-and-apps)
