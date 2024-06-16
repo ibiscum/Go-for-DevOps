@@ -29,7 +29,7 @@ const (
 var pv *version.PluginVersion
 
 func init() {
-	pv = version.InitializePluginVersion(ver, release)
+	pv = version.NewPluginVersion(ver, release, "")
 }
 
 func main() {
@@ -69,11 +69,11 @@ func (p *Provisioner) Prepare(raws ...interface{}) error {
 
 func (p *Provisioner) Provision(ctx context.Context, u packer.Ui, c packer.Communicator, m map[string]interface{}) error {
 	u.Message("Begin Go environment install")
-	if err := p.fetch(ctx, u, c); err != nil {
+	if err := p.fetch(u); err != nil {
 		u.Error(fmt.Sprintf("Error: %s", err))
 		return err
 	}
-	if err := p.push(ctx, u, c); err != nil {
+	if err := p.push(u, c); err != nil {
 		u.Error(fmt.Sprintf("Error: %s", err))
 		return err
 	}
@@ -89,7 +89,8 @@ func (p *Provisioner) Provision(ctx context.Context, u packer.Ui, c packer.Commu
 	return nil
 }
 
-func (p *Provisioner) fetch(ctx context.Context, u packer.Ui, c packer.Communicator) error {
+// func (p *Provisioner) fetch(ctx context.Context, u packer.Ui, c packer.Communicator) error {
+func (p *Provisioner) fetch(u packer.Ui) error {
 	const (
 		goURL = `https://golang.org/dl/go%s.linux-%s.tar.gz`
 		name  = `go%s.linux-%s.tar.gz`
@@ -135,14 +136,18 @@ func (p *Provisioner) fetch(ctx context.Context, u packer.Ui, c packer.Communica
 	return nil
 }
 
-func (p *Provisioner) push(ctx context.Context, u packer.Ui, c packer.Communicator) error {
+// func (p *Provisioner) push(ctx context.Context, u packer.Ui, c packer.Communicator) error {
+func (p *Provisioner) push(u packer.Ui, c packer.Communicator) error {
 	u.Message("Pushing Go tarball")
 
 	fs := simple.New()
-	fs.WriteFile("/tarball", p.content, 0700)
+	err := fs.WriteFile("/tarball", p.content, 0700)
+	if err != nil {
+		return err
+	}
 	fi, _ := fs.Stat("/tarball")
 
-	err := c.Upload(
+	err = c.Upload(
 		"/tmp/"+p.fileName,
 		bytes.NewReader(p.content),
 		&fi,
