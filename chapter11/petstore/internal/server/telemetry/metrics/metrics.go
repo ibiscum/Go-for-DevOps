@@ -92,7 +92,7 @@ var metrics = []metricDef{
 }
 
 // Meter is the meter for the petstore.
-var Meter = global.Meter("petstore")
+var Meter = otelGRPC.Meter("petstore")
 
 // Get is used to lookup metrics by name.
 var Get = newLookups()

@@ -13,7 +13,7 @@ import (
 	"github.com/ibiscum/Go-for-DevOps/chapter11/petstore/internal/server/telemetry/metrics"
 	"github.com/ibiscum/Go-for-DevOps/chapter11/petstore/internal/server/telemetry/tracing"
 
-	//grpcotel "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc"
+	// grpcotel "go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc"
 	"go.opentelemetry.io/otel/sdk/trace"
 )
 

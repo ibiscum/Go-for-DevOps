@@ -6,9 +6,7 @@ import (
 	"time"
 
 	"go.opentelemetry.io/otel"
-	"go.opentelemetry.io/otel/exporters/otlp/otlpmetric"
 	"go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc"
-	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/sdk/metric/controller/basic"
 	processor "go.opentelemetry.io/otel/sdk/metric/processor/basic"
 	// "go.opentelemetry.io/otel/sdk/metric/selector/simple"
@@ -59,13 +57,16 @@ func newController(ctx context.Context, c Controller) (*basic.Controller, error)
 }
 
 func otelGRPC(ctx context.Context, args OTELGRPC) (*basic.Controller, error) {
-	metricClient := otlpmetricgrpc.NewClient(
+	// metricClient := otlpmetricgrpc.New(
+	// 	otlpmetricgrpc.WithInsecure(),
+	// 	otlpmetricgrpc.WithEndpoint(args.Addr),
+	// )
+	metricExp, err := otlpmetricgrpc.New(ctx,
 		otlpmetricgrpc.WithInsecure(),
 		otlpmetricgrpc.WithEndpoint(args.Addr),
 	)
-	metricExp, err := otlpmetric.New(ctx, metricClient)
 	if err != nil {
-		return nil, fmt.Errorf("Failed to create the collector metric exporter")
+		return nil, fmt.Errorf("failed to create the collector metric exporter")
 	}
 
 	pusher := basic.New(

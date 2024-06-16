@@ -2,9 +2,10 @@ receivers:
   otlp:
     protocols:
       grpc:
+        endpoint: localhost:4317
 
 exporters:
-  jaeger:
+  otlp:
     endpoint: jaeger-all-in-one:14250
     tls:
       insecure: true
@@ -17,5 +18,4 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [jaeger]
-
+      exporters: [otlp]

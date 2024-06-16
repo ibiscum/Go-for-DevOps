@@ -2,10 +2,11 @@ receivers:
   otlp:
     protocols:
       grpc:
+        endpoint: "localhost:4317"
 
 exporters:
   prometheus:
-    endpoint: "0.0.0.0:8889"
+    endpoint: "localhost:8889"
     const_labels:
       label1: value1
   logging:
