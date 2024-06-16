@@ -18,9 +18,6 @@ use (
 	./chapter11/ops/proto
 	./chapter11/ops/proto/jaeger/model
 	./chapter12
-	./chapter13/petstore-provider
-	./chapter14/petstore-operator
-	./chapter14/workloads
 	./chapter15
 	./chapter16
 )
