@@ -18,7 +18,6 @@ import (
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 	"go.opentelemetry.io/otel/trace"
-	"google.golang.org/grpc"
 )
 
 var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
@@ -35,7 +34,8 @@ func main() {
 
 	// serve up the wrapped handler
 	http.Handle("/hello", wrappedHandler)
-	http.ListenAndServe(":7080", nil)
+	err := http.ListenAndServe(":7080", nil)
+	handleErr(err, "server not listening")
 }
 
 // handleRequestWithRandomSleep registers a request handler that will randomly sleep to induce artificial request latency.
@@ -63,7 +63,8 @@ func handleRequestWithRandomSleep() http.HandlerFunc {
 		ctx := req.Context()
 		span := trace.SpanFromContext(ctx)
 		span.SetAttributes(commonLabels...)
-		w.Write([]byte("Hello World"))
+		_, err := w.Write([]byte("Hello World"))
+		handleErr(err, "cannot write")
 	}
 }
 
@@ -90,10 +91,9 @@ func initTraceProvider() func() {
 func initTracer(ctx context.Context, otelAgentAddr string) func(context.Context) {
 	traceClient := otlptracegrpc.NewClient(
 		otlptracegrpc.WithInsecure(),
-		otlptracegrpc.WithEndpoint(otelAgentAddr),
-		otlptracegrpc.WithDialOption(grpc.WithBlock()))
+		otlptracegrpc.WithEndpoint(otelAgentAddr))
 	traceExp, err := otlptrace.New(ctx, traceClient)
-	handleErr(err, "Failed to create the collector trace exporter")
+	handleErr(err, "failed to create the collector trace exporter")
 
 	res, err := resource.New(ctx,
 		resource.WithFromEnv(),

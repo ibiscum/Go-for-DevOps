@@ -4,14 +4,16 @@ use (
 	./chapter05/excel/simple
 	./chapter05/excel/visualization
 	./chapter06/grpc
-    ./chapter06/rest
-    ./chapter06/mux
+	./chapter06/mux
+	./chapter06/rest
 	./chapter07
 	./chapter08
 	./chapter09/alerting/client
 	./chapter09/alerting/server
 	./chapter09/metrics/client
 	./chapter09/metrics/server
+	./chapter09/tracing/client
+	./chapter09/tracing/server
 	./chapter10
 	./chapter11/ops/proto
 	./chapter11/ops/proto/jaeger/model

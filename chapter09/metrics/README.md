@@ -3,7 +3,7 @@
 TODO: fill in the walk through
 
 ## Running this example
-- `docker-compose up -d`
+- `docker compose up -d`
 - Once started the client application will periodically send requests to the server. Metrics will be collected for the
   requests and responses, then exported for analysis in prometheus. To view the metrics in Prometheus, open http://localhost:9090/.
 - To see the request rate for the server see: http://localhost:9090/graph?g0.expr=rate(demo_server_request_counts%5B2m%5D)&g0.tab=0&g0.stacked=0&g0.show_exemplars=0&g0.range_input=1h
@@ -18,7 +18,7 @@ Traceback (most recent call last):
 This indicates that you aren't running docker. Make sure you have docker installed and it is running.
 
 ## Tearing down this example
-- `docker-compose down`
+- `docker compose down`
 
 ## Influences / Credit
 The code in this demo was heavily influenced from the example application in https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/examples/demo
@@ -39,4 +39,4 @@ which carries the following license.
 // limitations under the License.
 ```
 
-See also: [OTEL License](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/10cfdaac1387b4df7a525c3050ce18ec8f8068be/LICENSE
+See also: [OTEL License](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/10cfdaac1387b4df7a525c3050ce18ec8f8068be/LICENSE)

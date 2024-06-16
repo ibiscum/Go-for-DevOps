@@ -19,7 +19,6 @@ import (
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
-	"google.golang.org/grpc"
 )
 
 // main sets up the trace providers and starts a loop to continuously call the server
@@ -53,10 +52,9 @@ func initTraceProvider() func() {
 func initTracer(ctx context.Context, otelAgentAddr string) func(context.Context) {
 	traceClient := otlptracegrpc.NewClient(
 		otlptracegrpc.WithInsecure(),
-		otlptracegrpc.WithEndpoint(otelAgentAddr),
-		otlptracegrpc.WithDialOption(grpc.WithBlock()))
+		otlptracegrpc.WithEndpoint(otelAgentAddr))
 	traceExp, err := otlptrace.New(ctx, traceClient)
-	handleErr(err, "Failed to create the collector trace exporter")
+	handleErr(err, "failed to create the collector trace exporter")
 
 	res, err := resource.New(ctx,
 		resource.WithFromEnv(),
