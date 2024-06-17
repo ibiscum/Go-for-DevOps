@@ -14,6 +14,6 @@ resources:
   domain: example.com
   group: petstore
   kind: Pet
-  path: github.com/Go-for-DevOps/chapter/14/petstore-operator/api/v1alpha1
+  path: github.com/ibiscum/Go-for-DevOps/chapter/14/petstore-operator/api/v1alpha1
   version: v1alpha1
 version: "3"

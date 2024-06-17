@@ -37,6 +37,7 @@ func Start(ctx context.Context, c Controller) (Stop, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	return func() {
 		ctx, cancel := context.WithTimeout(ctx, 1*time.Second)
 		defer cancel()

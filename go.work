@@ -20,6 +20,8 @@ use (
 	./chapter11/ops/proto
 	./chapter11/ops/proto/jaeger/model
 	./chapter12
+    ./chapter14/petstore-operator
+    ./chapter14/workloads
 	./chapter15
 	./chapter16
 )

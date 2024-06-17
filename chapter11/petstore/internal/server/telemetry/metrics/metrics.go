@@ -46,7 +46,7 @@ import (
 	"github.com/ibiscum/Go-for-DevOps/chapter11/petstore/internal/server/log"
 
 	"go.opentelemetry.io/otel/metric"
-	"go.opentelemetry.io/otel/metric/global"
+
 	// "go.opentelemetry.io/otel/metric/global"
 )
 
@@ -144,7 +144,7 @@ func newLookups() *Lookups {
 
 		switch m.mtype {
 		case mtInt64Hist:
-			l.mtInt64Hist[m.name] = metric.c Must(Meter).NewInt64Histogram(m.name, metric.WithDescription(m.desc))
+			l.mtInt64Hist[m.name] = metric.Must(Meter).NewInt64Histogram(m.name, metric.WithDescription(m.desc))
 		case mtInt64UD:
 			l.mtInt64UD[m.name] = metric.Must(Meter).NewInt64UpDownCounter(m.name, metric.WithDescription(m.desc))
 		case mtInt64:
