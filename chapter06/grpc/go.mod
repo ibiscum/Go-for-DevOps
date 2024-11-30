@@ -2,7 +2,7 @@ module github.com/ibiscum/Go-for-DevOps/chapter06/grpc
 
 go 1.22.1
 
-require google.golang.org/grpc v1.64.0
+require google.golang.org/grpc v1.64.1
 
 require (
 	golang.org/x/net v0.26.0 // indirect
