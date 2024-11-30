@@ -1,8 +1,8 @@
 go 1.22.1
 
 use (
-	./chapter05/excel/simple
-	./chapter05/excel/visualization
+	./chapter05/simple
+	./chapter05/visualization
 	./chapter06/grpc
 	./chapter06/mux
 	./chapter06/rest
